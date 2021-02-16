@@ -58,3 +58,15 @@ C:\Users\maham\OneDrive\Desktop\Solved\Final_Web_Project_Starex_BackEnd\Entity\o
 C:\Users\maham\OneDrive\Desktop\Solved\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.csproj.CopyComplete
 C:\Users\maham\OneDrive\Desktop\Solved\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.dll
 C:\Users\maham\OneDrive\Desktop\Solved\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.pdb
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\bin\Debug\netcoreapp3.1\Entity.deps.json
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\bin\Debug\netcoreapp3.1\Entity.dll
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\bin\Debug\netcoreapp3.1\Entity.pdb
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\bin\Debug\netcoreapp3.1\Core.dll
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\bin\Debug\netcoreapp3.1\Core.pdb
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.AssemblyInfoInputs.cache
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.AssemblyInfo.cs
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.csproj.CopyComplete
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.dll
+C:\Users\HP\Desktop\test\Final_Web_Project_Starex_BackEnd\Final_Web_Project_Starex_BackEnd\Entity\obj\Debug\netcoreapp3.1\Entity.pdb

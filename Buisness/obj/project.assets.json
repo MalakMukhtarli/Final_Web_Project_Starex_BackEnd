@@ -2554,12 +2554,11 @@
       ]
     },
     "System.Collections.Specialized/4.3.0": {
-      "sha512": "Epx8PoVZR0iuOnJJDzp7pWvdfMMOAvpUo95pC4ScH2mJuXkKA2Y4aR3cG9qt2klHgSons1WFh4kcGW7cSXvrxg==",
+      "sha512": "NoPBj0ykejqAWW4p4gGtrrL+3c84ZLSvGnHgq422ew1Rj4WKj1FA8/BCybqC111EtgcqUl6ZJNFYYS22HLgbjA==",
       "type": "package",
       "path": "system.collections.specialized/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -4755,12 +4754,11 @@
       ]
     },
     "System.Runtime.Serialization.Primitives/4.3.0": {
-      "sha512": "Wz+0KOukJGAlXjtKr+5Xpuxf8+c8739RI1C+A2BoQZT+wMCCoMDDdO8/4IRHfaVINqL78GO8dW8G2lW/e45Mcw==",
+      "sha512": "2Z5t70a2SwMsfQDp9KOclaZNyQhfIga2gppq9lIUDM1A4ohTshn4JqT7ir8bvIhXgorWKYDAr6rPzEbi/nTGKg==",
       "type": "package",
       "path": "system.runtime.serialization.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5797,19 +5795,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\maham\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
       "projectName": "Buisness",
-      "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
-      "packagesPath": "C:\\Users\\maham\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Buisness\\obj\\",
+      "projectPath": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Buisness\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\maham\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5823,11 +5825,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj"
+            "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj"
             },
-            "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
-              "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
+            "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
             }
           }
         }
