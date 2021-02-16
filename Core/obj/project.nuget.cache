@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Yy+Hn/9psFORxx5ieTlD6R6KoCZH5C1ObY3rjoDgWJbqW1gxjYIjDG+RxteUVAI03jP8TYiU3A8OpdLlEQhmFg==",
+  "dgSpecHash": "tjuNGlvBqPcY0EaW+g/yvrfxxDnoFENRV9f/QyGAFDBtMmvt4n/B4mBwwqg70tiv0Cyz2Otr3C54xgQlPmWqpA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maham\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\maham\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

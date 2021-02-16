@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {}
+    "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
+    "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\maham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\obj\\",
+        "outputPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\maham\\AppData\\Roaming\\NuGet\\NuGet.Config",

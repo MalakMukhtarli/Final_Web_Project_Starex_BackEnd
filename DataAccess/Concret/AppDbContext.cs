@@ -1,7 +1,11 @@
 ﻿using Entity.Entities;
+using Entity.Entities.Contacts;
+using Entity.Entities.Countries;
 using Entity.Entities.HomePages;
 using Entity.Entities.Newss;
 using Entity.Entities.Questions;
+using Entity.Entities.Service;
+using Entity.Entities.Tariffs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,6 +27,10 @@ namespace DataAccess.Concret
         public DbSet<QuestionNavbar> QuestionNavbars { get; set; }
         public DbSet<Intro> Intors { get; set; }
         public DbSet<HowWorks> HowWorks { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Tariff> Tariffs { get; set; }
+        public DbSet<CountryContact> CountryContacts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -5782,11 +5782,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
+      "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
       "packagesPath": "C:\\Users\\maham\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\maham\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5803,11 +5803,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
+            "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
             },
-            "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
-              "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Github problem\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
+            "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\maham\\OneDrive\\Desktop\\Solved\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
             }
           }
         }
