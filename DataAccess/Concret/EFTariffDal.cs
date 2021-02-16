@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.Concret
 {
-    public class EFTariffDal: EFEntityRepositoryBase<Tariff, AppDbContext>, ITariffDal
+    public class EFTariffDal : EFEntityRepositoryBase<Tariff, AppDbContext>, ITariffDal
     {
     }
 }
