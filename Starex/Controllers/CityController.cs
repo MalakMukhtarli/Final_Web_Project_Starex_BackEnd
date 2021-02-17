@@ -64,6 +64,18 @@ namespace Starex.Controllers
             City cityDb = _cityContext.GetCityWithId(id);
             if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
             cityDb.IsDeleted = true;
+            foreach (var branch in cityDb.Branches)
+            {
+                branch.IsDeleted = true;
+                foreach (var tariff in branch.DistrictTariffs)
+                {
+                    tariff.IsDeleted = true;
+                }
+                foreach (var contact in branch.BranchContacts)
+                {
+                    contact.IsDeleted = true;
+                }
+            }
             _cityContext.Delete(id);
             return Ok();
         }

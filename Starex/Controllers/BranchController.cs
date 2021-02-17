@@ -65,6 +65,14 @@ namespace Starex.Controllers
             Branch branchDb = _branchContext.GetBranchWithId(id);
             if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
             branchDb.IsDeleted = true;
+            foreach (var contact in branchDb.BranchContacts)
+            {
+                contact.IsDeleted = true;
+            }
+            foreach (var tariff in branchDb.DistrictTariffs)
+            {
+                tariff.IsDeleted = true;
+            }
             _branchContext.Delete(id);
             return Ok();
         }

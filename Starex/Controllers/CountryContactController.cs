@@ -26,8 +26,8 @@ namespace Starex.Controllers
         {
             try
             {
-                List<CountryContact> contact = _contactService.GetAllContact();
-                return Ok(contact);
+                List<CountryContact> contacts = _contactService.GetAllContact();
+                return Ok(contacts);
             }
             catch (Exception e)
             {

@@ -5725,11 +5725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
+      "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\test\\Final_Web_Project_Starex_BackEnd\\Final_Web_Project_Starex_BackEnd\\Core\\obj\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
