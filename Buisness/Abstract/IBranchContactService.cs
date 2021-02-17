@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface IBranchContactService
     {
-        BranchContact GetContactWithId(int id);
-        List<BranchContact> GetAllContact();
-        void Add(BranchContact contact);
-        void Update(BranchContact contact);
-        void Delete(int id);
+        Task<BranchContact> GetWithId(int id);
+        Task<List<BranchContact>> GetAll();
+        Task Add(BranchContact contact);
+        Task Update(BranchContact contact);
+        Task Delete(int id);
     }
 }

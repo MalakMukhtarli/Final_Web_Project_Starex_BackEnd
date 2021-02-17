@@ -4,6 +4,7 @@ using Entity.Entities.Branches;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -14,29 +15,30 @@ namespace Buisness.Concret
         {
             _branchDal = branchDal;
         }
-        public void Add(Branch branch)
+
+        public async Task<List<Branch>> GetAll()
         {
-            _branchDal.Add(branch);
+            return await _branchDal.GetAll(b => !b.IsDeleted);
         }
 
-        public void Delete(int id)
+        public async Task<Branch> GetWithId(int id)
         {
-            _branchDal.Delete(new Branch { Id = id });
+            return await _branchDal.Get(b => b.Id == id && !b.IsDeleted);
         }
 
-        public List<Branch> GetAllBranch()
+        async Task IBranchService.Add(Branch branch)
         {
-            return _branchDal.GetAll(b => !b.IsDeleted);
+            await _branchDal.Add(branch);
         }
 
-        public Branch GetBranchWithId(int id)
+        async Task IBranchService.Delete(int id)
         {
-            return _branchDal.Get(b => b.Id == id && !b.IsDeleted);
+            await _branchDal.Delete(new Branch { Id = id });
         }
 
-        public void Update(Branch branch)
+        async Task IBranchService.Update(Branch branch)
         {
-            _branchDal.Update(branch);
+            await _branchDal.Update(branch);
         }
     }
 }

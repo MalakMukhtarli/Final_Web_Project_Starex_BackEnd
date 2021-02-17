@@ -4,6 +4,7 @@ using Entity.Entities.Contacts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -14,29 +15,30 @@ namespace Buisness.Concret
         {
             _branchContactDal = branchContactDal;
         }
-        public void Add(BranchContact contact)
+
+        public async Task<List<BranchContact>> GetAll()
         {
-            _branchContactDal.Add(contact);
+            return await _branchContactDal.GetAll();
         }
 
-        public void Delete(int id)
+        public async Task<BranchContact> GetWithId(int id)
         {
-            _branchContactDal.Delete(new BranchContact { Id = id });
+            return await _branchContactDal.Get(c => c.Id == id && !c.IsDeleted);
         }
 
-        public List<BranchContact> GetAllContact()
+        async Task IBranchContactService.Add(BranchContact contact)
         {
-            return _branchContactDal.GetAll();
+            await _branchContactDal.Add(contact);
         }
 
-        public BranchContact GetContactWithId(int id)
+        async Task IBranchContactService.Delete(int id)
         {
-            return _branchContactDal.Get(c => c.Id == id && !c.IsDeleted);
+            await _branchContactDal.Delete(new BranchContact { Id = id });
         }
 
-        public void Update(BranchContact contact)
+        async Task IBranchContactService.Update(BranchContact contact)
         {
-            _branchContactDal.Update(contact);
+            await _branchContactDal.Update(contact);
         }
     }
 }

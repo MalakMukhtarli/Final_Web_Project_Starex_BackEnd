@@ -4,6 +4,7 @@ using Entity.Entities.Newss;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -15,29 +16,29 @@ namespace Buisness.Concret
         {
             _context = context;
         }
-        public List<NewsDetail> GetAll()
+        public async Task<NewsDetail> GetWithId(int id)
         {
-            return _context.GetAll(n=> !n.IsDeleted);
+            return await _context.Get(nd => nd.Id == id && !nd.IsDeleted);
         }
 
-        public NewsDetail GetWithId(int id)
+        public async Task<List<NewsDetail>> GetAll()
         {
-            return _context.Get(nd=>nd.Id == id && !nd.IsDeleted);
-        }
-        public void Add(NewsDetail data)
-        {
-            _context.Add(data);
+            return await _context.GetAll(n => !n.IsDeleted);
         }
 
-        public void Delete(int id)
+        async Task INewsDetailService.Add(NewsDetail data)
         {
-            _context.Delete(new NewsDetail { Id = id });
+            await _context.Add(data);
         }
 
-
-        public void Update(NewsDetail data)
+        async Task INewsDetailService.Update(NewsDetail data)
         {
-            _context.Update(data);
+            await _context.Update(data);
+        }
+
+        async Task INewsDetailService.Delete(int id)
+        {
+            await _context.Delete(new NewsDetail { Id = id });
         }
     }
 }

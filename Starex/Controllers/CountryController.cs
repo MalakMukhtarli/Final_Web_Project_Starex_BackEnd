@@ -15,18 +15,18 @@ namespace Starex.Controllers
     [ApiController]
     public class CountryController : ControllerBase
     {
-        private readonly ICountryService _countryService;
+        private readonly ICountryService _context;
         public CountryController(ICountryService countryService)
         {
-            _countryService = countryService;
+            _context = countryService;
         }
         // GET: api/<CountryController>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<List<Country>>> Get()
         {
             try
             {
-                List<Country> country = _countryService.GetAllCountry();
+                List<Country> country = await _context.GetAll();
                 return Ok(country);
             }
             catch (Exception e)
@@ -37,11 +37,11 @@ namespace Starex.Controllers
 
         // GET api/<CountryController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<ActionResult<Country>> Get(int id)
         {
             try
             {
-                Country country = _countryService.GetCountryWithId(id);
+                Country country = await _context.GetWithId(id);
                 if (country == null) return StatusCode(StatusCodes.Status404NotFound);
                 return Ok(country);
             }
@@ -53,13 +53,13 @@ namespace Starex.Controllers
 
         // POST api/<CountryController>
         [HttpPost]
-        public IActionResult Create([FromBody] Country country)
+        public async Task<ActionResult> Create([FromBody] Country country)
         {
             try
             {
                 // SHEKIL UCUN EXTANSION ELAVE OLUNACAQ
                 if (!ModelState.IsValid) return BadRequest();
-                _countryService.Add(country);
+                await _context.Add(country);
                 return Ok();
             }
             catch (Exception e)
@@ -70,16 +70,16 @@ namespace Starex.Controllers
 
         // PUT api/<CountryController>/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Country country)
+        public async Task<ActionResult> Update(int id, [FromBody] Country country)
         {
             try
             {
-                Country countryDb = _countryService.GetCountryWithId(id);
-                if(countryDb==null) return StatusCode(StatusCodes.Status404NotFound);
+                Country countryDb = await _context.GetWithId(id);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 //countryDb.Image = country.Image;
                 countryDb.Name = country.Name;
                 countryDb.HasLiquid = country.HasLiquid;
-                _countryService.Update(countryDb);
+                await _context.Update(countryDb);
                 return Ok();
             }
             catch (Exception e)
@@ -90,11 +90,11 @@ namespace Starex.Controllers
 
         // DELETE api/<CountryController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                Country countryDb = _countryService.GetCountryWithId(id);
+                Country countryDb = await _context.GetWithId(id);
                 if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 countryDb.IsDeleted = true;
                 foreach (var item in countryDb.Tariffs)
@@ -106,7 +106,7 @@ namespace Starex.Controllers
                     item.IsDeleted = true;
                 }
                 // SHEKIL SILMEK YAZILACAQ
-                _countryService.Delete(id);
+                await _context.Update(countryDb);
                 return Ok();
             }
             catch (Exception e)

@@ -14,53 +14,52 @@ namespace Core.Repository.EFRepository
         where IContext : DbContext,new()
     {
 
-        TEntity IEntityRepository<TEntity>.Get(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new IContext())
             {
                 return filter == null
-                    ? context.Set<TEntity>().FirstOrDefault()
-                    : context.Set<TEntity>().Where(filter).FirstOrDefault();
+                    ? await context.Set<TEntity>().FirstOrDefaultAsync()
+                    : await context.Set<TEntity>().Where(filter).FirstOrDefaultAsync();
             }
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new IContext())
             {
                 return filter == null
-                    ? context.Set<TEntity>().ToList()
-                    : context.Set<TEntity>().Where(filter).ToList();
+                    ? await context.Set<TEntity>().ToListAsync()
+                    : await context.Set<TEntity>().Where(filter).ToListAsync();
             }
         }
-
-        public void Add(TEntity entity)
+        async Task IEntityRepository<TEntity>.Add(TEntity entity)
         {
             using (var context = new IContext())
             {
                 var addEntity = context.Entry(entity);
                 addEntity.State = EntityState.Added;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        public void Update(TEntity entity)
+        async Task IEntityRepository<TEntity>.Update(TEntity entity)
         {
             using (var context = new IContext())
             {
                 var addEntity = context.Entry(entity);
                 addEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        public void Delete(TEntity entity)
+        async Task IEntityRepository<TEntity>.Delete(TEntity entity)
         {
             using (var context = new IContext())
             {
                 var addEntity = context.Entry(entity);
                 addEntity.State = EntityState.Deleted;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
     }

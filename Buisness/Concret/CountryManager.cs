@@ -4,6 +4,7 @@ using Entity.Entities.Countries;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -14,29 +15,30 @@ namespace Buisness.Concret
         {
             _countryDal = countryDal;
         }
-        public void Add(Country country)
+
+        public async Task<List<Country>> GetAll()
         {
-            _countryDal.Add(country);
+            return await _countryDal.GetAll(c => !c.IsDeleted);
         }
 
-        public void Delete(int id)
+        public async Task<Country> GetWithId(int id)
         {
-            _countryDal.Delete(new Country { Id = id });
+            return await _countryDal.Get(c => c.Id == id && !c.IsDeleted);
         }
 
-        public List<Country> GetAllCountry()
+        async Task ICountryService.Add(Country country)
         {
-            return _countryDal.GetAll(c => !c.IsDeleted);
+            await _countryDal.Add(country);
         }
 
-        public Country GetCountryWithId(int id)
+        async Task ICountryService.Delete(int id)
         {
-            return _countryDal.Get(c => c.Id == id && !c.IsDeleted);
+            await _countryDal.Delete(new Country { Id = id });
         }
 
-        public void Update(Country country)
+        async Task ICountryService.Update(Country country)
         {
-            _countryDal.Update(country);
+            await _countryDal.Update(country);
         }
     }
 }

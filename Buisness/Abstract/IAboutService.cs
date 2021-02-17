@@ -8,10 +8,10 @@ namespace Buisness.Abstract
 {
     public interface IAboutService
     {
-        About GetWithId(int id);
-        List<About> GetAll();
-        void Add(About data);
-        void Update(About data);
-        void Delete(int id);
+        Task<About> GetWithId(int id);
+        Task<List<About>> GetAll();
+        Task Add(About data);
+        Task Update(About data);
+        Task Delete(int id);
     }
 }

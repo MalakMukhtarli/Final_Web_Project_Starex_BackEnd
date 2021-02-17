@@ -16,29 +16,29 @@ namespace Buisness.Concret
             _serviceDal = serviceDal;
         }
 
-        public void Add(Service service)
+        public async Task<Service> GetWithId(int id)
         {
-            _serviceDal.Add(service);
+            return await _serviceDal.Get(s => s.Id == id && !s.IsDeleted);
         }
 
-        public void Delete(int id)
+        public async Task<List<Service>> GetAll()
         {
-            _serviceDal.Delete(new Service { Id = id });
+            return await _serviceDal.GetAll(s => !s.IsDeleted);
         }
 
-        public List<Service> GetAllService()
+        async Task IServiceService.Add(Service service)
         {
-            return _serviceDal.GetAll(s => !s.IsDeleted);
+            await _serviceDal.Add(service);
         }
 
-        Service IServiceService.GetServiceWithId(int id)
+        async Task IServiceService.Update(Service service)
         {
-            return _serviceDal.Get(s => s.Id == id && !s.IsDeleted);
+            await _serviceDal.Update(service);
         }
 
-        public void Update(Service service)
+        async Task IServiceService.Delete(int id)
         {
-            _serviceDal.Update(service);
+            await _serviceDal.Delete(new Service { Id = id });
         }
     }
 }

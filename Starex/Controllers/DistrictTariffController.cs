@@ -15,58 +15,58 @@ namespace Starex.Controllers
     [ApiController]
     public class DistrictTariffController : ControllerBase
     {
-        private readonly IDistrictTariffService _tariffContext;
-        public DistrictTariffController(IDistrictTariffService tariffContext)
+        private readonly IDistrictTariffService _context;
+        public DistrictTariffController(IDistrictTariffService context)
         {
-            _tariffContext = tariffContext;
+            _context = context;
         }
         // GET: api/<DistrictTariffController>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<List<DistrictTariff>>> Get()
         {
-            List<DistrictTariff> tariffs = _tariffContext.GetAllTariff();
+            List<DistrictTariff> tariffs = await _context.GetAll();
             return Ok(tariffs);
         }
 
         // GET api/<DistrictTariffController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<ActionResult<DistrictTariff>> Get(int id)
         {
-            DistrictTariff tariff = _tariffContext.GetTariffWithId(id);
+            DistrictTariff tariff = await _context.GetWithId(id);
             if (tariff == null) return StatusCode(StatusCodes.Status404NotFound);
             return Ok(tariff);
         }
 
         // POST api/<DistrictTariffController>
         [HttpPost]
-        public IActionResult Create([FromBody] DistrictTariff tariff)
+        public async Task<ActionResult> Create([FromBody] DistrictTariff tariff)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _tariffContext.Add(tariff);
+            await _context.Add(tariff);
             return Ok();
 
         }
 
         // PUT api/<DistrictTariffController>/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] DistrictTariff tariff)
+        public async Task<ActionResult> Update(int id, [FromBody] DistrictTariff tariff)
         {
-            DistrictTariff tariffDb = _tariffContext.GetTariffWithId(id);
+            DistrictTariff tariffDb =await _context.GetWithId(id);
             if (tariffDb == null) return StatusCode(StatusCodes.Status404NotFound);
             tariffDb.District = tariff.District;
             tariffDb.Price = tariff.Price;
-            _tariffContext.Update(tariffDb);
+            await _context.Update(tariffDb);
             return Ok();
         }
 
         // DELETE api/<DistrictTariffController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            DistrictTariff tariffDb = _tariffContext.GetTariffWithId(id);
+            DistrictTariff tariffDb = await _context.GetWithId(id);
             if (tariffDb == null) return StatusCode(StatusCodes.Status404NotFound);
             tariffDb.IsDeleted = true;
-            _tariffContext.Delete(id);
+            await _context.Update(tariffDb);
             return Ok();
         }
     }

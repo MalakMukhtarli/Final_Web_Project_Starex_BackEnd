@@ -4,6 +4,7 @@ using Entity.Entities.Questions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -16,29 +17,29 @@ namespace Buisness.Concret
             _context = context;
         }
 
-        public List<QuestionNavbar> GetAll()
+        public async Task<List<QuestionNavbar>> GetAll()
         {
-            return _context.GetAll(q=> !q.IsDeleted);
+            return await _context.GetAll(q => !q.IsDeleted);
         }
 
-        public QuestionNavbar GetWithId(int id)
+        public async Task<QuestionNavbar> GetWithId(int id)
         {
-            return _context.Get(q=>q.Id==id && !q.IsDeleted);
+            return await _context.Get(q => q.Id == id && !q.IsDeleted);
         }
 
-        public void Add(QuestionNavbar data)
+        async Task IQuestionNavbarService.Add(QuestionNavbar data)
         {
-           _context.Add(data);
+            await _context.Add(data);
         }
 
-        public void Delete(int id)
+        async Task IQuestionNavbarService.Update(QuestionNavbar data)
         {
-            _context.Delete(new QuestionNavbar { Id = id });
+            await _context.Update(data);
         }
 
-        public void Update(QuestionNavbar data)
+        async Task IQuestionNavbarService.Delete(int id)
         {
-            _context.Update(data);
+            await _context.Delete(new QuestionNavbar { Id = id });
         }
     }
 }

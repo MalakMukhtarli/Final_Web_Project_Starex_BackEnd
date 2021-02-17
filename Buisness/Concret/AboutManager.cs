@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using Entity.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -14,29 +15,29 @@ namespace Buisness.Concret
             _aboutDAL = aboutDAL;
         }
 
-        public List<About> GetAll()
+        public async Task<About> GetWithId(int id)
         {
-            return _aboutDAL.GetAll();
+            return await _aboutDAL.Get(c => c.Id == id);
         }
 
-        public About GetWithId(int id)
+        public async Task<List<About>> GetAll()
         {
-            return _aboutDAL.Get(c => c.Id == id);
+            return await _aboutDAL.GetAll();
         }
 
-        public void Add(About data)
+        async Task IAboutService.Add(About data)
         {
-            _aboutDAL.Add(data);
+            await _aboutDAL.Add(data);
         }
 
-        public void Delete(int id)
+        async Task IAboutService.Update(About data)
         {
-            _aboutDAL.Delete(new About { Id = id });
+            await _aboutDAL.Update(data);
         }
 
-        public void Update(About data)
+        async Task IAboutService.Delete(int id)
         {
-            _aboutDAL.Update(data);
+            await _aboutDAL.Delete(new About { Id = id });
         }
     }
 }

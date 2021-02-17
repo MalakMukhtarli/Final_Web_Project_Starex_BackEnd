@@ -4,6 +4,7 @@ using Entity.Entities.Cities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -14,29 +15,30 @@ namespace Buisness.Concret
         {
             _cityDal = cityDal;
         }
-        public void Add(City city)
+
+        public async Task<List<City>> GetAll()
         {
-            _cityDal.Add(city);
+            return await _cityDal.GetAll(c => !c.IsDeleted);
         }
 
-        public void Delete(int id)
+        public async Task<City> GetWithId(int id)
         {
-            _cityDal.Delete(new City { Id = id });
+            return await _cityDal.Get(c => c.Id == id && !c.IsDeleted);
         }
 
-        public List<City> GetAllCity()
+        async Task ICityService.Add(City city)
         {
-            return _cityDal.GetAll(c => !c.IsDeleted);
+            await _cityDal.Add(city);
         }
 
-        public City GetCityWithId(int id)
+        async Task ICityService.Delete(int id)
         {
-            return _cityDal.Get(c => c.Id == id && !c.IsDeleted);
+            await _cityDal.Delete(new City { Id = id });
         }
 
-        public void Update(City city)
+        async Task ICityService.Update(City city)
         {
-            _cityDal.Update(city);
+            await _cityDal.Update(city);
         }
     }
 }

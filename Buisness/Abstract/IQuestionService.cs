@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface IQuestionService
     {
-        Question GetWithId(int id);
-        List<Question> GetAll();
-        void Add(Question data);
-        void Update(Question data);
-        void Delete(int id);
+        Task<Question> GetWithId(int id);
+        Task<List<Question>> GetAll();
+        Task Add(Question data);
+        Task Update(Question data);
+        Task Delete(int id);
     }
 }

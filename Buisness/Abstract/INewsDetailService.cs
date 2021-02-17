@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface INewsDetailService
     {
-        NewsDetail GetWithId(int id);
-        List<NewsDetail> GetAll();
-        void Add(NewsDetail data);
-        void Update(NewsDetail data);
-        void Delete(int id);
+        Task<NewsDetail> GetWithId(int id);
+        Task<List<NewsDetail>> GetAll();
+        Task Add(NewsDetail data);
+        Task Update(NewsDetail data);
+        Task Delete(int id);
     }
 }

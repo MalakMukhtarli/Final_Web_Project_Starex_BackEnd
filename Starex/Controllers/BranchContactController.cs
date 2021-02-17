@@ -15,59 +15,59 @@ namespace Starex.Controllers
     [ApiController]
     public class BranchContactController : ControllerBase
     {
-        private readonly IBranchContactService _contactContext;
-        public BranchContactController(IBranchContactService contactContext)
+        private readonly IBranchContactService _context;
+        public BranchContactController(IBranchContactService context)
         {
-            _contactContext = contactContext;
+            _context = context;
         }
         // GET: api/<BranchContactController>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<List<BranchContact>>> Get()
         {
-            List<BranchContact> contacts = _contactContext.GetAllContact();
+            List<BranchContact> contacts = await _context.GetAll();
             return Ok(contacts);
         }
 
         // GET api/<BranchContactController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<ActionResult<BranchContact>> Get(int id)
         {
-            BranchContact contact = _contactContext.GetContactWithId(id);
+            BranchContact contact = await _context.GetWithId(id);
             if (contact == null) return StatusCode(StatusCodes.Status404NotFound);
             return Ok(contact);
         }
 
         // POST api/<BranchContactController>
         [HttpPost]
-        public IActionResult Create([FromBody] BranchContact contact)
+        public async Task<ActionResult> Create([FromBody] BranchContact contact)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _contactContext.Add(contact);
+            await _context.Add(contact);
             return Ok();
         }
 
         // PUT api/<BranchContactController>/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] BranchContact contact)
+        public async Task<ActionResult> Update(int id, [FromBody] BranchContact contact)
         {
-            BranchContact contactDb = _contactContext.GetContactWithId(id);
+            BranchContact contactDb = await _context.GetWithId(id);
             if (contactDb == null) return StatusCode(StatusCodes.Status404NotFound);
             contactDb.Address = contact.Address;
             contactDb.Phone = contact.Phone;
             contactDb.Time = contact.Time;
             contactDb.Map = contact.Map;
-            _contactContext.Update(contactDb);
+            await _context.Update(contactDb);
             return Ok();
         }
 
         // DELETE api/<BranchContactController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            BranchContact contactDb = _contactContext.GetContactWithId(id);
+            BranchContact contactDb = await _context.GetWithId(id);
             if (contactDb == null) return StatusCode(StatusCodes.Status404NotFound);
             contactDb.IsDeleted = true;
-            _contactContext.Delete(id);
+            await _context.Update(contactDb);
             return Ok();
         }
     }

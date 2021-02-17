@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AfgnsJ9hJIYN3nk2n+xpCxc34tNMAmRpQgWEQlR6pOIYzgI6+L0Z74zkrwjFxFNbiE6AosJVwdx9uJ9PLQkbzw==",
+  "dgSpecHash": "LCftYK2aik37F8C4RIUSi/I55Z5wMA6ZR1r5a4YwA/SaSiKNXbfGCrlrYRAnDcMPAE+vduNombNE3lLD9zj/cg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\Maxammad\\Final_Web_Project_Starex_BackEnd-1\\Buisness\\Buisness.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.10\\microsoft.aspnetcore.http.features.3.1.10.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

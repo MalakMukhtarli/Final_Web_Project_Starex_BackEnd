@@ -4,6 +4,7 @@ using Entity.Entities.HomePages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -15,29 +16,29 @@ namespace Buisness.Concret
         {
             _introDal = introDal;
         }
-        public List<Intro> GetAllIntro()
+        public async Task<Intro> GetWithId(int id)
         {
-            return _introDal.GetAll();
+            return await _introDal.Get(i => i.Id == id);
         }
 
-        public Intro GetIntroWithId(int id)
+        async Task<List<Intro>> IIntroService.GetAll()
         {
-            return _introDal.Get(i=>i.Id == id);
+            return await _introDal.GetAll();
         }
 
-        public void AddIntro(Intro data)
+        async Task IIntroService.Add(Intro data)
         {
-            _introDal.Add(data);
+            await _introDal.Add(data);
         }
 
-        public void DeleteIntro(int id)
+        async Task IIntroService.Update(Intro data)
         {
-            _introDal.Delete(new Intro { Id = id });
+            await _introDal.Update(data);
         }
 
-        public void UpdateIntro(Intro data)
+        async Task IIntroService.Delete(int id)
         {
-            _introDal.Update(data);
+            await _introDal.Delete(new Intro { Id = id });
         }
     }
 }

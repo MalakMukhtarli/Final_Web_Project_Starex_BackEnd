@@ -15,23 +15,23 @@ namespace Starex.Controllers
     [ApiController]
     public class IntroController : ControllerBase
     {
-        private readonly IIntroService _introService;
+        private readonly IIntroService _context;
 
         public IntroController(IIntroService introService)
         {
-            _introService = introService;
+            _context = introService;
         }
 
         // GET: api/<IntroController>
         [HttpGet]
-        public ActionResult<List<Intro>> Get()
+        public async Task<ActionResult<List<Intro>>> Get()
         {
             try
             {
-                List<Intro> intros = _introService.GetAllIntro();
+                List<Intro> intros = await _context.GetAll();
                 return Ok(intros);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
@@ -39,11 +39,11 @@ namespace Starex.Controllers
 
         // GET api/<IntroController>/5
         [HttpGet("{id}")]
-        public ActionResult<Intro> Get(int id)
+        public async Task<ActionResult<Intro>> Get(int id)
         {
             try
             {
-                Intro intro = _introService.GetIntroWithId(id);
+                Intro intro = await _context.GetWithId(id);
                 if (intro == null) return StatusCode(StatusCodes.Status404NotFound);
                 return Ok(intro);
             }
@@ -56,12 +56,12 @@ namespace Starex.Controllers
 
         // POST api/<IntroController>
         [HttpPost]
-        public ActionResult Post([FromBody] Intro intro)
+        public async Task<ActionResult> Post([FromBody] Intro intro)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
-                _introService.AddIntro(intro);
+                await _context.Add(intro);
                 return Ok();
             }
             catch (Exception e)
@@ -72,15 +72,15 @@ namespace Starex.Controllers
 
         // PUT api/<IntroController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Intro intro)
+        public async Task<ActionResult> Put(int id, [FromBody] Intro intro)
         {
             try
             {
-                Intro dbIntro = _introService.GetIntroWithId(id);
+                Intro dbIntro = await _context.GetWithId(id);
                 if (dbIntro == null) return BadRequest();
 
                 dbIntro.Title = intro.Title;
-                _introService.UpdateIntro(dbIntro);
+                await _context.Update(dbIntro);
                 return Ok();
 
             }
@@ -92,11 +92,13 @@ namespace Starex.Controllers
 
         // DELETE api/<IntroController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                _introService.DeleteIntro(id);
+                Intro dbIntro = await _context.GetWithId(id);
+                if (dbIntro == null) return BadRequest();
+                await _context.Delete(id);
                 return Ok();
             }
             catch (Exception ex)

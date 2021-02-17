@@ -15,53 +15,53 @@ namespace Starex.Controllers
     [ApiController]
     public class CityController : ControllerBase
     {
-        private readonly ICityService _cityContext;
-        public CityController(ICityService cityContext)
+        private readonly ICityService _context;
+        public CityController(ICityService context)
         {
-            _cityContext = cityContext;
+            _context = context;
         }
         // GET: api/<CityController>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<List<City>>> Get()
         {
-            List<City> cities = _cityContext.GetAllCity();
+            List<City> cities = await _context.GetAll();
             return Ok(cities);
         }
 
         // GET api/<CityController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<ActionResult<City>> Get(int id)
         {
-            City city = _cityContext.GetCityWithId(id);
+            City city = await _context.GetWithId(id);
             if (city == null) return StatusCode(StatusCodes.Status404NotFound);
             return Ok(city);
         }
 
         // POST api/<CityController>
         [HttpPost]
-        public IActionResult Create([FromBody] City city)
+        public async Task<ActionResult> Create([FromBody] City city)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _cityContext.Add(city);
+            await _context.Add(city);
             return Ok();
         }
 
         // PUT api/<CityController>/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] City city)
+        public async Task<ActionResult> Update(int id, [FromBody] City city)
         {
-            City cityDb = _cityContext.GetCityWithId(id);
+            City cityDb = await _context.GetWithId(id);
             if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
             cityDb.Name = city.Name;
-            _cityContext.Update(cityDb);
+            await _context.Update(cityDb);
             return Ok();
         }
 
         // DELETE api/<CityController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            City cityDb = _cityContext.GetCityWithId(id);
+            City cityDb = await _context.GetWithId(id);
             if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
             cityDb.IsDeleted = true;
             foreach (var branch in cityDb.Branches)
@@ -76,7 +76,7 @@ namespace Starex.Controllers
                     contact.IsDeleted = true;
                 }
             }
-            _cityContext.Delete(id);
+            await _context.Update(cityDb);
             return Ok();
         }
     }

@@ -4,42 +4,40 @@ using Entity.Entities.Questions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
     public class QuestionManager : IQuestionService
     {
         private readonly IQuestionDal _context;
-
         public QuestionManager(IQuestionDal context)
         {
             _context = context;
         }
-
-        public List<Question> GetAll()
+        async Task IQuestionService.Add(Question data)
         {
-            return _context.GetAll(q => !q.IsDelete);
+            await _context.Add(data);
         }
 
-        public Question GetWithId(int id)
+        async Task IQuestionService.Delete(int id)
         {
-            return _context.Get(q=>q.Id == id && !q.IsDelete);
+            await _context.Delete(new Question { Id = id });
         }
 
-        public void Add(Question data)
+        public async Task<List<Question>> GetAll()
         {
-            _context.Add(data);
-
+            return await _context.GetAll(q => !q.IsDelete);
         }
 
-        public void Delete(int id)
+        public async Task<Question> GetWithId(int id)
         {
-            _context.Delete(new Question { Id = id });
+            return await _context.Get(q => q.Id == id && !q.IsDelete);
         }
 
-        public void Update(Question data)
+        async Task IQuestionService.Update(Question data)
         {
-            _context.Update(data);
+            await _context.Update(data);
         }
     }
 }

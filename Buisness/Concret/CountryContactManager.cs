@@ -4,6 +4,7 @@ using Entity.Entities.Contacts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -14,29 +15,30 @@ namespace Buisness.Concret
         {
             _countryContactDal = countryContactDal;
         }
-        public void Add(CountryContact contact)
+
+        public async Task<List<CountryContact>> GetAll()
         {
-            _countryContactDal.Add(contact);
+            return await _countryContactDal.GetAll(cc => !cc.IsDeleted);
         }
 
-        public void Delete(int id)
+        public async Task<CountryContact> GetWithId(int id)
         {
-            _countryContactDal.Delete(new CountryContact { Id = id });
+            return await _countryContactDal.Get(cc => cc.Id == id && !cc.IsDeleted);
         }
 
-        public List<CountryContact> GetAllContact()
+        async Task ICountryContactService.Add(CountryContact contact)
         {
-            return _countryContactDal.GetAll(cc => !cc.IsDeleted);
+            await _countryContactDal.Add(contact);
         }
 
-        public CountryContact GetContactWithId(int id)
+        async Task ICountryContactService.Delete(int id)
         {
-            return _countryContactDal.Get(cc => cc.Id == id && !cc.IsDeleted);
+            await _countryContactDal.Delete(new CountryContact { Id = id });
         }
 
-        public void Update(CountryContact contact)
+        async Task ICountryContactService.Update(CountryContact contact)
         {
-            _countryContactDal.Update(contact);
+            await _countryContactDal.Update(contact);
         }
     }
 }

@@ -4,6 +4,7 @@ using Entity.Entities.Tariffs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -14,29 +15,30 @@ namespace Buisness.Concret
         {
             _districtTariffDal = districtTariffDal;
         }
-        public void Add(DistrictTariff tariff)
+
+        public async Task<List<DistrictTariff>> GetAll()
         {
-            _districtTariffDal.Add(tariff);
+            return await _districtTariffDal.GetAll(t => !t.IsDeleted);
         }
 
-        public void Delete(int id)
+        public async Task<DistrictTariff> GetWithId(int id)
         {
-            _districtTariffDal.Delete(new DistrictTariff { Id = id });
+            return await _districtTariffDal.Get(t => t.Id == id && !t.IsDeleted);
         }
 
-        public List<DistrictTariff> GetAllTariff()
+        async Task IDistrictTariffService.Add(DistrictTariff tariff)
         {
-            return _districtTariffDal.GetAll(t => !t.IsDeleted);
+            await _districtTariffDal.Add(tariff);
         }
 
-        public DistrictTariff GetTariffWithId(int id)
+        async Task IDistrictTariffService.Delete(int id)
         {
-            return _districtTariffDal.Get(t => t.Id == id && !t.IsDeleted);
+            await _districtTariffDal.Delete(new DistrictTariff { Id = id });
         }
 
-        public void Update(DistrictTariff tariff)
+        async Task IDistrictTariffService.Update(DistrictTariff tariff)
         {
-            _districtTariffDal.Update(tariff);
+            await _districtTariffDal.Update(tariff);
         }
     }
 }

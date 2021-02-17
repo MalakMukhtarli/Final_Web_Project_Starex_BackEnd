@@ -15,54 +15,54 @@ namespace Starex.Controllers
     [ApiController]
     public class BranchController : ControllerBase
     {
-        private readonly IBranchService _branchContext;
-        public BranchController(IBranchService branchContext)
+        private readonly IBranchService _context;
+        public BranchController(IBranchService context)
         {
-            _branchContext = branchContext;
+            _context = context;
         }
         // GET: api/<BranchController> 
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<List<Branch>>> Get()
         {
-            List<Branch> branch = _branchContext.GetAllBranch();
-            return Ok(branch);
+            List<Branch> branchs = await _context.GetAll();
+            return Ok(branchs);
         }
 
         // GET api/<BranchController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            Branch branch = _branchContext.GetBranchWithId(id);
+            Branch branch = await _context.GetWithId(id);
             if (branch == null) return StatusCode(StatusCodes.Status404NotFound);
             return Ok(branch);
         }
 
         // POST api/<BranchController>
         [HttpPost]
-        public IActionResult Create([FromBody] Branch branch)
+        public async Task<ActionResult> Create([FromBody] Branch branch)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _branchContext.Add(branch);
+            await _context.Add(branch);
             return Ok();
         }
 
         // PUT api/<BranchController>/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Branch branch)
+        public async Task<ActionResult> Update(int id, [FromBody] Branch branch)
         {
-            Branch branchDb = _branchContext.GetBranchWithId(id);
+            Branch branchDb = await _context.GetWithId(id);
             if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
             branchDb.Name = branch.Name;
-            _branchContext.Update(branchDb);
+            await _context.Update(branchDb);
             return Ok();
         }
 
         // DELETE api/<BranchController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            Branch branchDb = _branchContext.GetBranchWithId(id);
+            Branch branchDb = await _context.GetWithId(id);
             if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
             branchDb.IsDeleted = true;
             foreach (var contact in branchDb.BranchContacts)
@@ -73,7 +73,7 @@ namespace Starex.Controllers
             {
                 tariff.IsDeleted = true;
             }
-            _branchContext.Delete(id);
+            await _context.Update(branchDb);
             return Ok();
         }
     }

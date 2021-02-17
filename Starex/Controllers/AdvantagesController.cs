@@ -16,54 +16,52 @@ namespace Starex.Controllers
     public class AdvantagesController : ControllerBase
     {
 
-        private readonly IAdvantagesService _advantagesService;
+        private readonly IAdvantagesService _context;
 
-        public AdvantagesController(IAdvantagesService advantagesService)
+        public AdvantagesController(IAdvantagesService context)
         {
-            _advantagesService = advantagesService;
+            _context = context;
         }
 
         // GET: api/<AdvantagesController>
         [HttpGet]
-        public ActionResult<List<Advantages>> Get()
+        public async Task<ActionResult<List<Advantages>>> Get()
         {
             try
             {
-                List<Advantages> advantages = _advantagesService.GetAll();
+                List<Advantages> advantages = await _context.GetAll();
                 return Ok(advantages);
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         // GET api/<AdvantagesController>/5
         [HttpGet("{id}")]
-        public ActionResult<Advantages> Get(int id)
+        public async Task<ActionResult<Advantages>> Get(int id)
         {
             try
             {
-                Advantages advantages = _advantagesService.GetWithId(id);
+                Advantages advantages = await _context.GetWithId(id);
                 if (advantages == null) return StatusCode(StatusCodes.Status404NotFound);
                 return Ok(advantages);
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         // POST api/<AdvantagesController>
         [HttpPost]
-        public ActionResult Post([FromBody] Advantages advantages)
+        public async Task<ActionResult> Post([FromBody] Advantages advantages)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
-                _advantagesService.Add(advantages);
+                await _context.Add(advantages);
                 return Ok();
             }
             catch (Exception e)
@@ -74,20 +72,19 @@ namespace Starex.Controllers
 
         // PUT api/<AdvantagesController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Advantages advantages)
+        public async Task<ActionResult> Put(int id, [FromBody] Advantages advantages)
         {
             try
             {
-                Advantages dbAdvatages = _advantagesService.GetWithId(id);
+                Advantages dbAdvatages = await _context.GetWithId(id);
                 if (dbAdvatages == null) return BadRequest();
 
                 dbAdvatages.Icon = advantages.Icon;
                 dbAdvatages.Title = advantages.Title;
                 dbAdvatages.Description = advantages.Description;
 
-                _advantagesService.Update(dbAdvatages);
+                await _context.Update(dbAdvatages);
                 return Ok();
-
             }
             catch (Exception e)
             {
@@ -97,11 +94,14 @@ namespace Starex.Controllers
 
         // DELETE api/<AdvantagesController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                _advantagesService.Delete(id);
+                Advantages advantages = await _context.GetWithId(id);
+                if (advantages == null) return StatusCode(StatusCodes.Status404NotFound);
+                advantages.IsDeleted = true;
+                await _context.Update(advantages);
                 return Ok();
             }
             catch (Exception e)

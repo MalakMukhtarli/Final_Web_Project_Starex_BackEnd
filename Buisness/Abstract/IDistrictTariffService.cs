@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface IDistrictTariffService
     {
-        DistrictTariff GetTariffWithId(int id);
-        List<DistrictTariff> GetAllTariff();
-        void Add(DistrictTariff tariff);
-        void Update(DistrictTariff tariff);
-        void Delete(int id);
+        Task<DistrictTariff> GetWithId(int id);
+        Task<List<DistrictTariff>> GetAll();
+        Task Add(DistrictTariff tariff);
+        Task Update(DistrictTariff tariff);
+        Task Delete(int id);
     }
 }

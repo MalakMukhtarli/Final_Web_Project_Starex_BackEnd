@@ -4,6 +4,7 @@ using Entity.Entities.HomePages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -16,29 +17,29 @@ namespace Buisness.Concret
             _advantagesDal = advantagesDal;
         }
 
-        public List<Advantages> GetAll()
+        public async Task<Advantages> GetWithId(int id)
         {
-            return _advantagesDal.GetAll();
+            return await _advantagesDal.Get(a => a.Id == id && !a.IsDeleted);
         }
 
-        public Advantages GetWithId(int id)
+        public async Task<List<Advantages>> GetAll()
         {
-            return _advantagesDal.Get(a=>a.Id==id && !a.IsDeleted);
+            return await _advantagesDal.GetAll();
         }
 
-        public void Add(Advantages data)
+        async Task IAdvantagesService.Add(Advantages data)
         {
-            _advantagesDal.Add(data);
+            await _advantagesDal.Add(data);
         }
 
-        public void Delete(int id)
+        async Task IAdvantagesService.Update(Advantages data)
         {
-            _advantagesDal.Delete(new Advantages { Id = id });
+            await _advantagesDal.Update(data);
         }
 
-        public void Update(Advantages data)
+        async Task IAdvantagesService.Delete(int id)
         {
-            _advantagesDal.Update(data);
+            await _advantagesDal.Delete(new Advantages { Id = id });
         }
     }
 }

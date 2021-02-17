@@ -23,11 +23,11 @@ namespace Starex.Controllers
         }
         // GET: api/<AboutController>
         [HttpGet]
-        public ActionResult<List<About>> Get()
+        public async Task<ActionResult<List<About>>> Get()
         {
             try
             {
-                List <About > abouts = _context.GetAll();
+                List<About> abouts = await _context.GetAll();
                 return Ok(abouts);
             }
             catch (Exception ex)
@@ -37,11 +37,11 @@ namespace Starex.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<About> Get(int id)
+        public async Task<ActionResult<About>> Get(int id)
         {
             try
             {
-                About about = _context.GetWithId(id);
+                About about = await _context.GetWithId(id);
                 if(about == null) return StatusCode(StatusCodes.Status404NotFound);
                 return Ok(about);
             }
@@ -52,12 +52,12 @@ namespace Starex.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post (About about)
+        public async Task<ActionResult> Post([FromBody] About about)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
-                _context.Add(about);
+                await _context.Add(about);
                 return Ok();
             }
             catch (Exception e) 
@@ -68,19 +68,18 @@ namespace Starex.Controllers
 
         // PUT api/<AboutController>/5
         [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromBody] About about)
+        public async Task<ActionResult> Update(int id, [FromBody] About about)
         {
             try
             {
-                About dbAbout = _context.GetWithId(id);
+                About dbAbout = await _context.GetWithId(id);
                 if (dbAbout == null) return BadRequest();
-                
 
                 dbAbout.Description = about.Description;
                 dbAbout.Title = about.Title;
                 dbAbout.Content = about.Content;
 
-                _context.Update(dbAbout);
+                await _context.Update(dbAbout);
                 return Ok();
 
             }
@@ -92,11 +91,13 @@ namespace Starex.Controllers
 
         // DELETE api/<AboutController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                _context.Delete(id);
+                About about = await _context.GetWithId(id);
+                if (about == null) return StatusCode(StatusCodes.Status404NotFound);
+                await _context.Delete(id);
                 return Ok();
             }
             catch (Exception e)

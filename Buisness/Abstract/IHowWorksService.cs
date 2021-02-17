@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface IHowWorksService
     {
-        HowWorks GetWithId(int id);
-        List<HowWorks> GetAll();
-        void Add(HowWorks data);
-        void Update(HowWorks data);
-        void Delete(int id);
+        Task<HowWorks> GetWithId(int id);
+        Task<List<HowWorks>> GetAll();
+        Task Add(HowWorks data);
+        Task Update(HowWorks data);
+        Task Delete(int id);
     }
 }

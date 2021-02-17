@@ -4,6 +4,7 @@ using Entity.Entities.HomePages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Concret
 {
@@ -17,30 +18,29 @@ namespace Buisness.Concret
             _howWorksDal = howWorksDal;
         }
 
-        //private readonly 
-        public void Add(HowWorks data)
+        async Task IHowWorksService.Add(HowWorks data)
         {
-            _howWorksDal.Add(data);
+            await _howWorksDal.Add(data);
         }
 
-        public void Delete(int id)
+        async Task IHowWorksService.Delete(int id)
         {
-            _howWorksDal.Delete(new HowWorks { Id = id });
+            await _howWorksDal.Delete(new HowWorks { Id = id });
         }
 
-        public List<HowWorks> GetAll()
+        public async Task<List<HowWorks>> GetAll()
         {
-            return _howWorksDal.GetAll();
+            return await _howWorksDal.GetAll();
         }
 
-        public HowWorks GetWithId(int id)
+        public async Task<HowWorks> GetWithId(int id)
         {
-            return _howWorksDal.Get(a => a.Id == id);
+            return await _howWorksDal.Get(a => a.Id == id);
         }
 
-        public void Update(HowWorks data)
+        async Task IHowWorksService.Update(HowWorks data)
         {
-            _howWorksDal.Update(data);
+            await _howWorksDal.Update(data);
         }
     }
 }

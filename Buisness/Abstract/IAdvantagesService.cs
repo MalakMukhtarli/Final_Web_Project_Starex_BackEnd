@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface IAdvantagesService
     {
-        Advantages GetWithId(int id);
-        List<Advantages> GetAll();
-        void Add(Advantages data);
-        void Update(Advantages data);
-        void Delete(int id);
+        Task<Advantages> GetWithId(int id);
+        Task<List<Advantages>> GetAll();
+        Task Add(Advantages data);
+        Task Update(Advantages data);
+        Task Delete(int id);
     }
 }

@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface ICountryContactService
     {
-        CountryContact GetContactWithId(int id);
-        List<CountryContact> GetAllContact();
-        void Add(CountryContact contact);
-        void Update(CountryContact contact);
-        void Delete(int id);
+        Task<CountryContact> GetWithId(int id);
+        Task<List<CountryContact>> GetAll();
+        Task Add(CountryContact contact);
+        Task Update(CountryContact contact);
+        Task Delete(int id);
     }
 }

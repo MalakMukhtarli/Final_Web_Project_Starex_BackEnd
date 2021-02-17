@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface ICountryService
     {
-        Country GetCountryWithId(int id);
-        List<Country> GetAllCountry();
-        void Add(Country country);
-        void Update(Country country);
-        void Delete(int id);
+        Task<Country> GetWithId(int id);
+        Task<List<Country>> GetAll();
+        Task Add(Country country);
+        Task Update(Country country);
+        Task Delete(int id);
     }
 }

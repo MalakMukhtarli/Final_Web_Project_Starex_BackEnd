@@ -19,15 +19,15 @@ namespace Starex.Controllers
 
         public QuestionNavbarController(IQuestionNavbarService context)
         {
-            _context = context;   
+            _context = context;
         }
         // GET: api/<QuestionNavbarController>
         [HttpGet]
-        public ActionResult<List<QuestionNavbar>> Get()
+        public async Task<ActionResult<List<QuestionNavbar>>> Get()
         {
             try
             {
-                List<QuestionNavbar> questions = _context.GetAll();
+                List<QuestionNavbar> questions = await _context.GetAll();
                 return Ok(questions);
             }
             catch (Exception e)
@@ -38,11 +38,11 @@ namespace Starex.Controllers
 
         // GET api/<QuestionNavbarController>/5
         [HttpGet("{id}")]
-        public ActionResult<QuestionNavbar> Get(int id)
+        public async Task<ActionResult<QuestionNavbar>> Get(int id)
         {
             try
             {
-                QuestionNavbar question = _context.GetWithId(id);
+                QuestionNavbar question = await _context.GetWithId(id);
                 if (question == null) return StatusCode(StatusCodes.Status404NotFound);
                 return Ok(question);
             }
@@ -54,12 +54,12 @@ namespace Starex.Controllers
 
         // POST api/<QuestionNavbarController>
         [HttpPost]
-        public ActionResult Post(QuestionNavbar question)
+        public async Task<ActionResult> Post(QuestionNavbar question)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
-                _context.Add(question);
+                await _context.Add(question);
                 return Ok();
             }
             catch (Exception ex)
@@ -70,16 +70,16 @@ namespace Starex.Controllers
 
         // PUT api/<QuestionNavbarController>/5
         [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromBody] QuestionNavbar questionNavbar)
+        public async Task<ActionResult> Update(int id, [FromBody] QuestionNavbar questionNavbar)
         {
             try
             {
-                QuestionNavbar dbQuestion = _context.GetWithId(id);
+                QuestionNavbar dbQuestion = await _context.GetWithId(id);
                 if (dbQuestion == null) return BadRequest();
 
                 dbQuestion.Title = questionNavbar.Title;
 
-                _context.Update(dbQuestion);
+                await _context.Update(dbQuestion);
                 return Ok();
             }
             catch (Exception ex)
@@ -90,16 +90,18 @@ namespace Starex.Controllers
 
         // DELETE api/<QuestionNavbarController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            QuestionNavbar dbQuestion = _context.GetWithId(id);
+            QuestionNavbar dbQuestion =await _context.GetWithId(id);
             try
             {
+                if (dbQuestion == null) return BadRequest();
+                dbQuestion.IsDeleted = true;
                 foreach (Question item in dbQuestion.Questions)
                 {
                     item.IsDelete = true;
                 }
-                _context.Delete(id);
+                await _context.Update(dbQuestion);
                 return Ok();
             }
             catch (Exception ex)

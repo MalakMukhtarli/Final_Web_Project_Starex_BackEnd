@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,11 +22,11 @@ namespace Starex.Controllers
         }
         // GET: api/<NewsController>
         [HttpGet]
-        public ActionResult<List<News>> Get()
+        public async Task<ActionResult<List<News>>> Get()
         {
             try
             {
-                List<News> news = _context.GetAll();
+                List<News> news = await _context.GetAll();
                 return Ok(news);
             }
             catch (Exception e)
@@ -36,11 +37,11 @@ namespace Starex.Controllers
 
         // GET api/<NewsController>/5
         [HttpGet("{id}")]
-        public ActionResult<News> Get(int id)
+        public async Task<ActionResult<News>> Get(int id)
         {
             try
             {
-                News news = _context.GetWithId(id);
+                News news = await _context.GetWithId(id);
                 if (news == null) return StatusCode(StatusCodes.Status404NotFound);
                 return Ok();
             }
@@ -52,12 +53,12 @@ namespace Starex.Controllers
 
         // POST api/<NewsController>
         [HttpPost]
-        public ActionResult Post(News news)
+        public async Task<ActionResult> Post(News news)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
-                _context.Add(news);
+                await _context.Add(news);
                 return Ok();
             }
             catch (Exception ex)
@@ -68,11 +69,11 @@ namespace Starex.Controllers
 
         // PUT api/<NewsController>/5
         [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromBody] News news)
+        public async Task<ActionResult> Update(int id, [FromBody] News news)
         {
             try
             {
-                News dbNews = _context.GetWithId(id);
+                News dbNews = await _context.GetWithId(id);
                 if (dbNews == null) return BadRequest();
 
                 dbNews.Title = news.Title;
@@ -80,7 +81,7 @@ namespace Starex.Controllers
                 news.CreatedTime = DateTime.Now;
                 dbNews.CreatedTime = news.CreatedTime;
                 //will be image extention
-                _context.Update(dbNews);
+                await _context.Update(dbNews);
                 return Ok();
             }
             catch (Exception ex)
@@ -91,11 +92,15 @@ namespace Starex.Controllers
 
         // DELETE api/<NewsController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                _context.Delete(id);
+                News dbNews = await _context.GetWithId(id);
+                if (dbNews == null) return BadRequest();
+                dbNews.IsDeleted = true;
+                dbNews.NewsDetail.IsDeleted = true;
+                await _context.Update(dbNews);
                 return Ok();
             }
             catch (Exception ex)

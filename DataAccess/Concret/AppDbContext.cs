@@ -23,10 +23,12 @@ namespace DataAccess.Concret
 
         public DbSet<About> Abouts { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<NewsDetail> NewsDetail { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuestionNavbar> QuestionNavbars { get; set; }
-        public DbSet<Intro> Intors { get; set; }
+        public DbSet<Intro> Intros { get; set; }
         public DbSet<HowWorks> HowWorks { get; set; }
+        public DbSet<Advantages> Advantages { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Tariff> Tariffs { get; set; }

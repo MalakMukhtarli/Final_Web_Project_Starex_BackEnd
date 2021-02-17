@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Buisness.Abstract
 {
     public interface IQuestionNavbarService
     {
-        QuestionNavbar GetWithId(int id);
-        List<QuestionNavbar> GetAll();
-        void Add(QuestionNavbar data);
-        void Update(QuestionNavbar data);
-        void Delete(int id);
+        Task<QuestionNavbar> GetWithId(int id);
+        Task<List<QuestionNavbar>> GetAll();
+        Task Add(QuestionNavbar data);
+        Task Update(QuestionNavbar data);
+        Task Delete(int id);
     }
 }
