@@ -10,7 +10,7 @@ namespace Entity.Entities.Questions
         public int Id { get; set; }
         public string AskedQuestion { get; set; }
         public string ResponseQuestion { get; set; }
-        public virtual QuestionNavbar QuestionNavbar { get; set; }
+        public QuestionNavbar QuestionNavbar { get; set; }
         public int QuestionNavbarId { get; set; }
         public bool IsDelete { get; set; }
 

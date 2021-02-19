@@ -1,5 +1,7 @@
 ﻿using Buisness.Abstract;
 using Entity.Entities.Branches;
+using Entity.Entities.Contacts;
+using Entity.Entities.Tariffs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,9 +18,15 @@ namespace Starex.Controllers
     public class BranchController : ControllerBase
     {
         private readonly IBranchService _context;
-        public BranchController(IBranchService context)
+        private readonly IBranchContactService _contextContact;
+        private readonly IDistrictTariffService _contextTariff;
+        public BranchController(IBranchService context, 
+                                IBranchContactService contextContact, 
+                                IDistrictTariffService contextTariff)
         {
             _context = context;
+            _contextContact = contextContact;
+            _contextTariff = contextTariff;
         }
         // GET: api/<BranchController> 
 
@@ -54,6 +62,7 @@ namespace Starex.Controllers
             Branch branchDb = await _context.GetWithId(id);
             if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
             branchDb.Name = branch.Name;
+            branchDb.CityId = branch.CityId;
             await _context.Update(branchDb);
             return Ok();
         }
@@ -65,14 +74,27 @@ namespace Starex.Controllers
             Branch branchDb = await _context.GetWithId(id);
             if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
             branchDb.IsDeleted = true;
-            foreach (var contact in branchDb.BranchContacts)
+
+            List<BranchContact> allContacts = await _contextContact.GetAll();
+            foreach (BranchContact contact in allContacts)
             {
-                contact.IsDeleted = true;
+                if (contact.BranchId == branchDb.Id)
+                {
+                    contact.IsDeleted = true;
+                }
+                await _contextContact.Update(contact);
             }
-            foreach (var tariff in branchDb.DistrictTariffs)
+
+            List<DistrictTariff> allTariffs = await _contextTariff.GetAll();
+            foreach (DistrictTariff tariff in allTariffs)
             {
-                tariff.IsDeleted = true;
+                if (tariff.BranchId == branchDb.Id)
+                {
+                    tariff.IsDeleted = true;
+                }
+                await _contextTariff.Update(tariff);
             }
+
             await _context.Update(branchDb);
             return Ok();
         }

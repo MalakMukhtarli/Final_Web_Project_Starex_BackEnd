@@ -56,6 +56,7 @@ namespace Starex.Controllers
             contactDb.Phone = contact.Phone;
             contactDb.Time = contact.Time;
             contactDb.Map = contact.Map;
+            contactDb.BranchId = contact.BranchId;
             await _context.Update(contactDb);
             return Ok();
         }

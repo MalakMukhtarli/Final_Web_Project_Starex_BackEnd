@@ -77,6 +77,7 @@ namespace Starex.Controllers
                 if (contactDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 contactDb.Address = contact.Address;
                 contactDb.Time = contact.Time;
+                contactDb.CountryId = contact.CountryId;
                 await _context.Update(contactDb);
                 return Ok();
             }

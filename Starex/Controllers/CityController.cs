@@ -1,5 +1,8 @@
 ﻿using Buisness.Abstract;
+using Entity.Entities.Branches;
 using Entity.Entities.Cities;
+using Entity.Entities.Contacts;
+using Entity.Entities.Tariffs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,9 +19,18 @@ namespace Starex.Controllers
     public class CityController : ControllerBase
     {
         private readonly ICityService _context;
-        public CityController(ICityService context)
+        private readonly IBranchService _contextBranch;
+        private readonly IBranchContactService _contextContact;
+        private readonly IDistrictTariffService _contextTariff;
+        public CityController(ICityService context,
+                              IBranchService contextBranch,
+                              IBranchContactService contextContact,
+                              IDistrictTariffService contextTariff)
         {
             _context = context;
+            _contextBranch = contextBranch;
+            _contextContact = contextContact;
+            _contextTariff = contextTariff;
         }
         // GET: api/<CityController>
         [HttpGet]
@@ -64,18 +76,39 @@ namespace Starex.Controllers
             City cityDb = await _context.GetWithId(id);
             if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
             cityDb.IsDeleted = true;
-            foreach (var branch in cityDb.Branches)
+
+            List<Branch> allBranch = await _contextBranch.GetAll();
+            Branch branchDb = null;
+            foreach (Branch branch in allBranch)
             {
-                branch.IsDeleted = true;
-                foreach (var tariff in branch.DistrictTariffs)
+                if (branch.CityId == cityDb.Id)
                 {
-                    tariff.IsDeleted = true;
+                    branch.IsDeleted = true;
+                    branchDb = branch;
                 }
-                foreach (var contact in branch.BranchContacts)
+                await _contextBranch.Update(branch);
+
+                List<BranchContact> allContacts = await _contextContact.GetAll();
+                foreach (BranchContact contact in allContacts)
                 {
-                    contact.IsDeleted = true;
+                    if (contact.BranchId == branchDb.Id)
+                    {
+                        contact.IsDeleted = true;
+                    }
+                    await _contextContact.Update(contact);
+                }
+
+                List<DistrictTariff> allTariffs = await _contextTariff.GetAll();
+                foreach (DistrictTariff tariff in allTariffs)
+                {
+                    if (tariff.BranchId == branchDb.Id)
+                    {
+                        tariff.IsDeleted = true;
+                    }
+                    await _contextTariff.Update(tariff);
                 }
             }
+
             await _context.Update(cityDb);
             return Ok();
         }

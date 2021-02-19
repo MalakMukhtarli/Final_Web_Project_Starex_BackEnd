@@ -1,5 +1,7 @@
 ﻿using Buisness.Abstract;
+using Entity.Entities.Contacts;
 using Entity.Entities.Countries;
+using Entity.Entities.Tariffs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,9 +18,15 @@ namespace Starex.Controllers
     public class CountryController : ControllerBase
     {
         private readonly ICountryService _context;
-        public CountryController(ICountryService countryService)
+        private readonly ICountryContactService _contextContact;
+        private readonly ITariffService _contextTariff;
+        public CountryController(ICountryService countryService,
+                                 ICountryContactService contextContact,
+                                 ITariffService contextTariff)
         {
             _context = countryService;
+            _contextContact = contextContact;
+            _contextTariff = contextTariff;
         }
         // GET: api/<CountryController>
         [HttpGet]
@@ -97,13 +105,25 @@ namespace Starex.Controllers
                 Country countryDb = await _context.GetWithId(id);
                 if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 countryDb.IsDeleted = true;
-                foreach (var item in countryDb.Tariffs)
+
+                List<CountryContact> allContacts = await _contextContact.GetAll();
+                foreach (CountryContact contact in allContacts)
                 {
-                    item.IsDeleted = true;
+                    if (contact.CountryId == countryDb.Id)
+                    {
+                        contact.IsDeleted = true;
+                    }
+                    await _contextContact.Update(contact);
                 }
-                foreach (var item in countryDb.CountryContacts)
+
+                List<Tariff> allTariffs = await _contextTariff.GetAll();
+                foreach (Tariff tariff in allTariffs)
                 {
-                    item.IsDeleted = true;
+                    if (tariff.CountryId == countryDb.Id)
+                    {
+                        tariff.IsDeleted = true;
+                    }
+                    await _contextTariff.Update(tariff);
                 }
                 // SHEKIL SILMEK YAZILACAQ
                 await _context.Update(countryDb);

@@ -10,7 +10,7 @@ namespace Entity.Entities.Questions
         public int Id { get; set; }
         public string Title { get; set; }
         public bool IsDeleted { get; set; }
-        public ICollection<Question> Questions { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
 
     }
 }

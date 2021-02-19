@@ -16,10 +16,13 @@ namespace Starex.Controllers
     public class QuestionNavbarController : ControllerBase
     {
         private readonly IQuestionNavbarService _context;
+        private readonly IQuestionService _contextQuestion;
 
-        public QuestionNavbarController(IQuestionNavbarService context)
+        public QuestionNavbarController(IQuestionNavbarService context, IQuestionService contextQuestion)
         {
             _context = context;
+            _contextQuestion = contextQuestion;
+
         }
         // GET: api/<QuestionNavbarController>
         [HttpGet]
@@ -92,15 +95,24 @@ namespace Starex.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            QuestionNavbar dbQuestion =await _context.GetWithId(id);
             try
             {
+                QuestionNavbar dbQuestion = await _context.GetWithId(id);
+
                 if (dbQuestion == null) return BadRequest();
                 dbQuestion.IsDeleted = true;
-                foreach (Question item in dbQuestion.Questions)
+
+                List<Question> questions = await _contextQuestion.GetAll();
+                foreach (Question ques in questions)
                 {
-                    item.IsDelete = true;
+                    if (ques.QuestionNavbarId == dbQuestion.Id)
+                    {
+                        ques.IsDelete = true;
+                    }
+                    await _contextQuestion.Update(ques);
                 }
+
+
                 await _context.Update(dbQuestion);
                 return Ok();
             }

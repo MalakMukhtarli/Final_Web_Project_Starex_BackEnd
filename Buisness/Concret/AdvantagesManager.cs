@@ -24,7 +24,7 @@ namespace Buisness.Concret
 
         public async Task<List<Advantages>> GetAll()
         {
-            return await _advantagesDal.GetAll();
+            return await _advantagesDal.GetAll(a =>!a.IsDeleted);
         }
 
         async Task IAdvantagesService.Add(Advantages data)

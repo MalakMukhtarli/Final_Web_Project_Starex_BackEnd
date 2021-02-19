@@ -18,7 +18,7 @@ namespace Buisness.Concret
 
         public async Task<List<BranchContact>> GetAll()
         {
-            return await _branchContactDal.GetAll();
+            return await _branchContactDal.GetAll(c =>!c.IsDeleted);
         }
 
         public async Task<BranchContact> GetWithId(int id)

@@ -17,6 +17,12 @@
     <Compile Remove="Migrations\20210216051145_First.Designer.cs" />
     <Compile Remove="Migrations\20210216135953_Test.cs" />
     <Compile Remove="Migrations\20210216135953_Test.Designer.cs" />
+    <Compile Remove="Migrations\20210216140225_Test.cs" />
+    <Compile Remove="Migrations\20210216140225_Test.Designer.cs" />
+    <Compile Remove="Migrations\20210218161138_AllModelsTables.cs" />
+    <Compile Remove="Migrations\20210218161138_AllModelsTables.Designer.cs" />
+    <Compile Remove="Migrations\20210218162651_AllModelssTables.cs" />
+    <Compile Remove="Migrations\20210218162651_AllModelssTables.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +37,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Entity\Entity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
