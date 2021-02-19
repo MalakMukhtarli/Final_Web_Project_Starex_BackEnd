@@ -3,45 +3,49 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-public static class Extension
+namespace Starex.Extension
 {
-    /// <summary>
-    /// check for pictures
-    /// </summary>
-    /// <param name="photo"></param>
-    /// <returns></returns>
-    public static bool IsImage(this IFormFile photo)
+    public static class Extension
     {
-        return photo.ContentType.Contains("image/");
-    }
-
-    /// <summary>
-    /// to check the dimensions of the images
-    /// </summary>
-    /// <param name="photo"></param>
-    /// <param name="kb"></param>
-    /// <returns></returns>
-    public static bool PhotoLength(this IFormFile photo, int kb)
-    {
-        return photo.Length / 1024 <= kb;
-    }
-
-    /// <summary>
-    /// to add pictures to a folder.
-    /// return Task.
-    /// </summary>
-    /// <param name="photo">photo IFormFile type</param>
-    /// <param name="root">string root</param>
-    /// <param name="folder">only one folder name</param>
-    /// <returns></returns>
-    public static async Task<string> AddImageAsync(this IFormFile photo, string root, string folder)
-    {
-        string PhotoName = Guid.NewGuid().ToString() + photo.FileName;
-        string path = Path.Combine(root, folder, PhotoName);
-        using (FileStream fileStream = new FileStream(path, FileMode.Create))
+        /// <summary>
+        /// check for pictures
+        /// </summary>
+        /// <param name="photo"></param>
+        /// <returns></returns>
+        public static bool IsImage(this IFormFile photo)
         {
-            await photo.CopyToAsync(fileStream);
+            return photo.ContentType.Contains("image/");
         }
-        return PhotoName;
+
+        /// <summary>
+        /// to check the dimensions of the images
+        /// </summary>
+        /// <param name="photo"></param>
+        /// <param name="kb"></param>
+        /// <returns></returns>
+        public static bool PhotoLength(this IFormFile photo, int kb)
+        {
+            return photo.Length / 1024 <= kb;
+        }
+
+        /// <summary>
+        /// to add pictures to a folder.
+        /// return Task.
+        /// </summary>
+        /// <param name="photo">photo IFormFile type</param>
+        /// <param name="root">string root</param>
+        /// <param name="folder">only one folder name</param>
+        /// <returns></returns>
+        public static async Task<string> AddImageAsync(this IFormFile photo, string root, string folder)
+        {
+            string PhotoName = Guid.NewGuid().ToString() + photo.FileName;
+            string path = Path.Combine(root, folder, PhotoName);
+            using (FileStream fileStream = new FileStream(path, FileMode.Create))
+            {
+                await photo.CopyToAsync(fileStream);
+            }
+            return PhotoName;
+        }
     }
+
 }

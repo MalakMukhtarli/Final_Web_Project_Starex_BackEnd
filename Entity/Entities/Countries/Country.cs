@@ -8,6 +8,7 @@ using Entity.Entities.Contacts;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entity.Entities.Declarations;
 
 namespace Entity.Entities.Countries
 {
@@ -23,5 +24,6 @@ namespace Entity.Entities.Countries
         public IFormFile Photo { get; set; }
         public virtual ICollection<Tariff> Tariffs { get; set; }
         public virtual ICollection<CountryContact> CountryContacts { get; set; }
+        public virtual ICollection<Declaration> Declarations { get; set; }
     }
 }

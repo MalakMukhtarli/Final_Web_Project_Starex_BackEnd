@@ -1,6 +1,9 @@
 ﻿using Entity.Entities;
+using Entity.Entities.Branches;
+using Entity.Entities.Cities;
 using Entity.Entities.Contacts;
 using Entity.Entities.Countries;
+using Entity.Entities.Declarations;
 using Entity.Entities.HomePages;
 using Entity.Entities.Newss;
 using Entity.Entities.Questions;
@@ -33,6 +36,11 @@ namespace DataAccess.Concret
         public DbSet<Country> Countries { get; set; }
         public DbSet<Tariff> Tariffs { get; set; }
         public DbSet<CountryContact> CountryContacts { get; set; }
+        public DbSet<BranchContact> BranchContacts { get; set; }
+        public DbSet<Branch> Branches { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Declaration> Declarations { get; set; }
+        public DbSet<DistrictTariff> DistrictTariffs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

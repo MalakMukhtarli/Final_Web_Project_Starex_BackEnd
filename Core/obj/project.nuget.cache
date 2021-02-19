@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Pib6gprthaB8R/Ql4kE+UlPJ83fL4ZkNrmfJXnvSqp9X5VBB9eTjmcj83BWYYQyH8l3dgzWmkVKsD3sNNgvv1g==",
+  "dgSpecHash": "FPrDAoyFuU/nhAQkOgg4NjpqH65toWcJXQcDxdzw0DbMPWKcIIt40lKtFTxKWRYko850yjRPMlJ8tGmEUPQfMw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\Desktop\\Maxammad\\Final_Web_Project_Starex_BackEnd-1\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
