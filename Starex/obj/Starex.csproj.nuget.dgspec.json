@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj": {}
+    "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj": {
+    "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
         "projectName": "Buisness",
-        "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Buisness\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Buisness\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -31,11 +32,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
               }
             }
           }
@@ -72,29 +73,33 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
+    "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -149,25 +154,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -180,11 +186,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
               },
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
               }
             }
           }
@@ -225,29 +231,33 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
+    "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj",
         "projectName": "Entity",
-        "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -260,8 +270,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
               }
             }
           }
@@ -276,7 +286,15 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.10, )"
+            },
             "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[3.1.10, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.10, )"
             },
@@ -296,29 +314,33 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj": {
+    "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj",
         "projectName": "Starex",
-        "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Starex\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Starex\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -331,17 +353,17 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Buisness\\Buisness.csproj"
               },
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
               },
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
-                "projectPath": "C:\\Users\\HP\\Desktop\\16.02.2021\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
+              "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
               }
             }
           }
@@ -385,7 +407,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

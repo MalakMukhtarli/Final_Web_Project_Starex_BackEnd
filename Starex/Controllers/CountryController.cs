@@ -1,6 +1,7 @@
 ﻿using Buisness.Abstract;
 using Entity.Entities.Contacts;
 using Entity.Entities.Countries;
+using Entity.Entities.Stores;
 using Entity.Entities.Tariffs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,16 @@ namespace Starex.Controllers
         private readonly ICountryService _context;
         private readonly ICountryContactService _contextContact;
         private readonly ITariffService _contextTariff;
+        private readonly IStoreService _contextStore;
         public CountryController(ICountryService countryService,
                                  ICountryContactService contextContact,
-                                 ITariffService contextTariff)
+                                 ITariffService contextTariff,
+                                 IStoreService contextStore)
         {
             _context = countryService;
             _contextContact = contextContact;
             _contextTariff = contextTariff;
+            _contextStore = contextStore;
         }
         // GET: api/<CountryController>
         [HttpGet]
@@ -114,6 +118,16 @@ namespace Starex.Controllers
                         contact.IsDeleted = true;
                     }
                     await _contextContact.Update(contact);
+                }
+
+                List<Store> allStores = await _contextStore.GetAll();
+                foreach (Store store in allStores)
+                {
+                    if (store.CountryId == countryDb.Id)
+                    {
+                        store.IsDeleted = true;
+                    }
+                    await _contextStore.Update(store);
                 }
 
                 List<Tariff> allTariffs = await _contextTariff.GetAll();

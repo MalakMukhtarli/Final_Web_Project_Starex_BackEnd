@@ -48,4 +48,10 @@ namespace Starex.Extension
         }
     }
 
+    public enum Roles
+    {
+        SuperAdmin,
+        Admin,
+        SimpleUser
+    }
 }

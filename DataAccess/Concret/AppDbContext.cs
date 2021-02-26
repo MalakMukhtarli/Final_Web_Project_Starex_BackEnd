@@ -1,4 +1,7 @@
 ﻿using Entity.Entities;
+using Entity.Entities.Address;
+using Entity.Entities.Balancess;
+using Entity.Entities.Bios;
 using Entity.Entities.Branches;
 using Entity.Entities.Cities;
 using Entity.Entities.Contacts;
@@ -6,9 +9,13 @@ using Entity.Entities.Countries;
 using Entity.Entities.Declarations;
 using Entity.Entities.HomePages;
 using Entity.Entities.Newss;
+using Entity.Entities.Notfications;
+using Entity.Entities.Orders;
 using Entity.Entities.Questions;
 using Entity.Entities.Service;
+using Entity.Entities.Stores;
 using Entity.Entities.Tariffs;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,14 +48,20 @@ namespace DataAccess.Concret
         public DbSet<City> Cities { get; set; }
         public DbSet<Declaration> Declarations { get; set; }
         public DbSet<DistrictTariff> DistrictTariffs { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Balance> Balances { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Bio> Bios { get; set; }
+        public DbSet<Notfication> Notfications { get; set; }
+        public DbSet<Store> Stores { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<News>()
-                .HasOne(b => b.NewsDetail)
-                .WithOne(i => i.News)
-                .HasForeignKey<NewsDetail>(b => b.NewsId);
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<News>()
+        //        .HasOne(b => b.NewsDetail)
+        //        .WithOne(i => i.News)
+        //        .HasForeignKey<NewsDetail>(b => b.NewsId);
+        //}
     }
 }

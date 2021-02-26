@@ -23,6 +23,20 @@
     <Compile Remove="Migrations\20210218161138_AllModelsTables.Designer.cs" />
     <Compile Remove="Migrations\20210218162651_AllModelssTables.cs" />
     <Compile Remove="Migrations\20210218162651_AllModelssTables.Designer.cs" />
+    <Compile Remove="Migrations\20210219075520_AllTable.cs" />
+    <Compile Remove="Migrations\20210219075520_AllTable.Designer.cs" />
+    <Compile Remove="Migrations\20210219142823_OrderAndBio.cs" />
+    <Compile Remove="Migrations\20210219142823_OrderAndBio.Designer.cs" />
+    <Compile Remove="Migrations\20210223063418_IdentityTable.cs" />
+    <Compile Remove="Migrations\20210223063418_IdentityTable.Designer.cs" />
+    <Compile Remove="Migrations\20210223064119_IdentityTable.cs" />
+    <Compile Remove="Migrations\20210223064119_IdentityTable.Designer.cs" />
+    <Compile Remove="Migrations\20210223064607_IdentityTable.cs" />
+    <Compile Remove="Migrations\20210223064607_IdentityTable.Designer.cs" />
+    <Compile Remove="Migrations\20210223064912_IdentityTable.cs" />
+    <Compile Remove="Migrations\20210223064912_IdentityTable.Designer.cs" />
+    <Compile Remove="Migrations\20210223065204_AllModelsTable.cs" />
+    <Compile Remove="Migrations\20210223065204_AllModelsTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

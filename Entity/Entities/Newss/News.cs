@@ -17,8 +17,8 @@ namespace Entity.Entities.Newss
         public bool IsDeleted { get; set; }
         public DateTime? Date { get; set; }
         public DateTime CreatedTime { get; set; }
-        public virtual NewsDetail NewsDetail { get; set; }
-        public int NewsDetailId { get; set; }
+        //public virtual NewsDetail NewsDetail { get; set; }
+        //public int NewsDetailId { get; set; }
 
     }
 }

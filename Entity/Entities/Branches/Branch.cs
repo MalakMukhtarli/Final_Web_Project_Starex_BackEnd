@@ -17,6 +17,7 @@ namespace Entity.Entities.Branches
         public bool IsDeleted { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
+        public virtual ICollection<AppUser> AppUsers { get; set; }
         public virtual ICollection<DistrictTariff> DistrictTariffs { get; set; }
         public virtual ICollection<BranchContact> BranchContacts { get; set; }
     }

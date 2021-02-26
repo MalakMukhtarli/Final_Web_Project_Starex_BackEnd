@@ -99,7 +99,7 @@ namespace Starex.Controllers
                 News dbNews = await _context.GetWithId(id);
                 if (dbNews == null) return BadRequest();
                 dbNews.IsDeleted = true;
-                dbNews.NewsDetail.IsDeleted = true;
+                //dbNews.NewsDetail.IsDeleted = true;
                 await _context.Update(dbNews);
                 return Ok();
             }
