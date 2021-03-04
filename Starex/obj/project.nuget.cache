@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iMmj4lJS79oKkYQv7d3C3VxWGON2KnfVfHh2f54OH/+Uabk5sSomzuXI9kN1c0/WxDoEOCiWAVQc6HHR+jnI+g==",
+  "dgSpecHash": "+is8gvBUJHsbRKFMQEggWexeKonl2pyu/nNlp+bISgYyFyPMwLEYH/IeZ0RiQ4EPd8PWgCc+yVWOt2tzOqaGhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\Starex\\Starex.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.10\\microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.10\\microsoft.aspnetcore.cryptography.internal.3.1.10.nupkg.sha512",

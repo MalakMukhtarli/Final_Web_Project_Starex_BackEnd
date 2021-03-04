@@ -1,6 +1,6 @@
 ﻿using Buisness.Abstract;
 using DataAccess.Abstract;
-using Entity.Entities.Address;
+using Entity.Entities.Addresses;
 using System;
 using System.Collections.Generic;
 using System.Text;

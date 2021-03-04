@@ -1,5 +1,5 @@
 ﻿using Core.Repository;
-using Entity.Entities.Address;
+using Entity.Entities.Addresses;
 using System;
 using System.Collections.Generic;
 using System.Text;

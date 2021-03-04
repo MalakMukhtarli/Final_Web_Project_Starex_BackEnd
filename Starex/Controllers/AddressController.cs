@@ -1,5 +1,6 @@
 ﻿using Buisness.Abstract;
-using Entity.Entities.Address;
+using Entity.Entities.Addresses;
+using Entity.Entities.Countries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,10 +17,13 @@ namespace Starex.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _context;
+        private readonly ICountryService _contextCountry;
 
-        public AddressController(IAddressService addressService)
+        public AddressController(IAddressService addressService,
+                                 ICountryService contextCountry)
         {
             _context = addressService;
+            _contextCountry = contextCountry;
         }
 
         // GET: api/<AddressController>
@@ -45,6 +49,9 @@ namespace Starex.Controllers
             {
                 Address address = await _context.GetWithId(id);
                 if (address == null) return StatusCode(StatusCodes.Status404NotFound);
+                Country countryDb = await _contextCountry.GetWithId(address.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                address.Country = countryDb;
                 return Ok(address);
             }
             catch (Exception ex)
@@ -60,6 +67,8 @@ namespace Starex.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
+                Country countryDb = await _contextCountry.GetWithId(address.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 await _context.Add(address);
                 return Ok();
             }
@@ -77,14 +86,17 @@ namespace Starex.Controllers
             {
                 Address dbAddress = await _context.GetWithId(id);
                 if (dbAddress == null) return BadRequest();
+                Country countryDb = await _contextCountry.GetWithId(address.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
 
                 dbAddress.AddressFirst = address.AddressFirst;
                 dbAddress.AddressSecond = address.AddressSecond;
                 dbAddress.City = address.City;
-                dbAddress.Country = address.Country;
+                dbAddress.CountryName = address.CountryName;
                 dbAddress.Phone = address.Phone;
                 dbAddress.Region = address.Region;
                 dbAddress.Zip = address.Zip;
+                dbAddress.CountryId = address.CountryId;
 
                 await _context.Update(dbAddress);
                 return Ok();

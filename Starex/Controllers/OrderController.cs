@@ -93,7 +93,6 @@ namespace Starex.Controllers
                 await _context.Update(dbOrder);
 
                 return Ok();
-
             }
             catch (Exception e)
             {

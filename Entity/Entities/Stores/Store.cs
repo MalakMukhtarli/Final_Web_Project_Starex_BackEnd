@@ -17,8 +17,7 @@ namespace Entity.Entities.Stores
         public string Name { get; set; }
         public string Link { get; set; }
         public bool IsDeleted { get; set; }
-        public Country Country { get; set; }
         public int CountryId { get; set; }
-
+        public Country Country { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Entity.Entities.Branches;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entity.Entities.Contacts
@@ -19,6 +20,7 @@ namespace Entity.Entities.Contacts
         [Required]
         public string Map { get; set; }
         public bool IsDeleted { get; set; }
+        [ForeignKey("Branch")]
         public int BranchId { get; set; }
         public Branch Branch { get; set; }
     }

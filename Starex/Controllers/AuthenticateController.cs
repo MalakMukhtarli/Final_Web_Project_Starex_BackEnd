@@ -1,4 +1,6 @@
-﻿using Entity.Entities;
+﻿using Buisness.Abstract;
+using Entity.Entities;
+using Entity.Entities.Branches;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +24,16 @@ namespace Starex.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
+        private readonly IBranchService _contextBranch;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         public IConfiguration Configuration { get; }
         public AuthenticateController(UserManager<AppUser> userManager,
                                       RoleManager<IdentityRole> roleManager,
-                                      IConfiguration configuration)
+                                      IConfiguration configuration,
+                                      IBranchService contextBranch)
         {
+            _contextBranch = contextBranch;
             _userManager = userManager;
             _roleManager = roleManager;
             Configuration = configuration;
@@ -43,12 +48,14 @@ namespace Starex.Controllers
             //if (isExistUsername != null) return StatusCode(StatusCodes.Status403Forbidden);
             AppUser isExistEmail = await _userManager.FindByEmailAsync(register.Email);
             if (isExistEmail != null) return StatusCode(StatusCodes.Status403Forbidden);
-
+            Branch branchDb = await _contextBranch.GetWithId(register.BranchId);
+            if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
             AppUser newUser = new AppUser
             {
                 Name = register.Name,
                 Surname = register.Surname,
                 Email = register.Email,
+                PhoneNumber=register.Phone,
                 Gender = register.Gender,
                 Birthday = register.Birthday,
                 Address = register.Address,

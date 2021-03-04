@@ -50,7 +50,6 @@ namespace Starex.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -86,7 +85,6 @@ namespace Starex.Controllers
 
                 await _context.Update(dbWorks);
                 return Ok();
-
             }
             catch (Exception e)
             {

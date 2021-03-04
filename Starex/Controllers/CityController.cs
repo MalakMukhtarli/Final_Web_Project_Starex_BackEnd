@@ -36,81 +36,122 @@ namespace Starex.Controllers
         [HttpGet]
         public async Task<ActionResult<List<City>>> Get()
         {
-            List<City> cities = await _context.GetAll();
-            return Ok(cities);
+            try
+            {
+                List<City> cities = await _context.GetAll();
+                return Ok(cities);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
         }
 
         // GET api/<CityController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<City>> Get(int id)
         {
-            City city = await _context.GetWithId(id);
-            if (city == null) return StatusCode(StatusCodes.Status404NotFound);
-            return Ok(city);
+            try
+            {
+                City city = await _context.GetWithId(id);
+                if (city == null) return StatusCode(StatusCodes.Status404NotFound);
+                
+                return Ok(city);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
         }
 
         // POST api/<CityController>
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] City city)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            await _context.Add(city);
-            return Ok();
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest();
+                await _context.Add(city);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
         }
 
         // PUT api/<CityController>/5
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] City city)
         {
-            City cityDb = await _context.GetWithId(id);
-            if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
-            cityDb.Name = city.Name;
-            await _context.Update(cityDb);
-            return Ok();
+            try
+            {
+                City cityDb = await _context.GetWithId(id);
+                if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                cityDb.Name = city.Name;
+                await _context.Update(cityDb);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
         }
 
         // DELETE api/<CityController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            City cityDb = await _context.GetWithId(id);
-            if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
-            cityDb.IsDeleted = true;
-
-            List<Branch> allBranch = await _contextBranch.GetAll();
-            Branch branchDb = null;
-            foreach (Branch branch in allBranch)
+            try
             {
-                if (branch.CityId == cityDb.Id)
-                {
-                    branch.IsDeleted = true;
-                    branchDb = branch;
-                }
-                await _contextBranch.Update(branch);
+                City cityDb = await _context.GetWithId(id);
+                if (cityDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                cityDb.IsDeleted = true;
 
-                List<BranchContact> allContacts = await _contextContact.GetAll();
-                foreach (BranchContact contact in allContacts)
+                List<Branch> allBranch = await _contextBranch.GetAll();
+                Branch branchDb = null;
+                foreach (Branch branch in allBranch)
                 {
-                    if (contact.BranchId == branchDb.Id)
+                    if (branch.CityId == cityDb.Id)
                     {
-                        contact.IsDeleted = true;
+                        branch.IsDeleted = true;
+                        branchDb = branch;
                     }
-                    await _contextContact.Update(contact);
+                    await _contextBranch.Update(branch);
+
+                    List<BranchContact> allContacts = await _contextContact.GetAll();
+                    foreach (BranchContact contact in allContacts)
+                    {
+                        if (contact.BranchId == branchDb.Id)
+                        {
+                            contact.IsDeleted = true;
+                        }
+                        await _contextContact.Update(contact);
+                    }
+
+                    List<DistrictTariff> allTariffs = await _contextTariff.GetAll();
+                    foreach (DistrictTariff tariff in allTariffs)
+                    {
+                        if (tariff.BranchId == branchDb.Id)
+                        {
+                            tariff.IsDeleted = true;
+                        }
+                        await _contextTariff.Update(tariff);
+                    }
                 }
 
-                List<DistrictTariff> allTariffs = await _contextTariff.GetAll();
-                foreach (DistrictTariff tariff in allTariffs)
-                {
-                    if (tariff.BranchId == branchDb.Id)
-                    {
-                        tariff.IsDeleted = true;
-                    }
-                    await _contextTariff.Update(tariff);
-                }
+                await _context.Update(cityDb);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
 
-            await _context.Update(cityDb);
-            return Ok();
         }
     }
 }

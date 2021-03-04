@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Entity.Entities.Countries;
 using Entity.Entities.Tariffs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,12 @@ namespace Starex.Controllers
     public class TariffController : ControllerBase
     {
         private readonly ITariffService _context;
-        public TariffController(ITariffService tariffService)
+        private readonly ICountryService _contextCountry;
+        public TariffController(ITariffService tariffService,
+                                ICountryService contextCountry)
         {
             _context = tariffService;
+            _contextCountry = contextCountry;
         }
         // GET: api/<TariffController>
         [HttpGet]
@@ -44,6 +48,9 @@ namespace Starex.Controllers
             {
                 Tariff tariffsDb = await _context.GetWithId(id);
                 if (tariffsDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                Country countryDb = await _contextCountry.GetWithId(tariffsDb.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                tariffsDb.Country = countryDb;
                 return Ok(tariffsDb);
             }
             catch (Exception e)
@@ -59,6 +66,8 @@ namespace Starex.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
+                Country countryDb = await _contextCountry.GetWithId(tariff.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 await _context.Add(tariff);
                 return Ok();
             }
@@ -76,12 +85,14 @@ namespace Starex.Controllers
             {
                 Tariff tariffDb = await _context.GetWithId(id);
                 if (tariffDb == null) return StatusCode(StatusCodes.Status404NotFound);
-
+                Country countryDb = await _contextCountry.GetWithId(tariffDb.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 tariffDb.EndWeight = tariff.EndWeight;
                 tariffDb.IsLiquid = tariff.IsLiquid;
                 tariffDb.Price = tariff.Price;
                 tariffDb.StartWeight = tariff.StartWeight;
                 tariffDb.Weight = tariff.Weight;
+                tariffDb.CountryId = tariff.CountryId;
 
                 await _context.Update(tariffDb);
                 return Ok();

@@ -33,7 +33,6 @@ namespace Starex.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -50,7 +49,6 @@ namespace Starex.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

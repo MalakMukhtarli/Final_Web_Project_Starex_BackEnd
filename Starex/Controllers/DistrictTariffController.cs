@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Entity.Entities.Branches;
 using Entity.Entities.Tariffs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,58 +17,104 @@ namespace Starex.Controllers
     public class DistrictTariffController : ControllerBase
     {
         private readonly IDistrictTariffService _context;
-        public DistrictTariffController(IDistrictTariffService context)
+        private readonly IBranchService _contextBranch;
+        public DistrictTariffController(IDistrictTariffService context,
+                                        IBranchService contextBranch)
         {
             _context = context;
+            _contextBranch = contextBranch;
         }
         // GET: api/<DistrictTariffController>
         [HttpGet]
         public async Task<ActionResult<List<DistrictTariff>>> Get()
         {
-            List<DistrictTariff> tariffs = await _context.GetAll();
-            return Ok(tariffs);
+            try
+            {
+                List<DistrictTariff> tariffs = await _context.GetAll();
+                return Ok(tariffs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         // GET api/<DistrictTariffController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DistrictTariff>> Get(int id)
         {
-            DistrictTariff tariff = await _context.GetWithId(id);
-            if (tariff == null) return StatusCode(StatusCodes.Status404NotFound);
-            return Ok(tariff);
+            try
+            {
+                DistrictTariff tariff = await _context.GetWithId(id);
+                if (tariff == null) return StatusCode(StatusCodes.Status404NotFound);
+                Branch branchDb = await _contextBranch.GetWithId(tariff.BranchId);
+                if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                tariff.Branch = branchDb;
+                return Ok(tariff);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         // POST api/<DistrictTariffController>
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] DistrictTariff tariff)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            await _context.Add(tariff);
-            return Ok();
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest();
+                Branch branchDb = await _contextBranch.GetWithId(tariff.BranchId);
+                if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
 
+                await _context.Add(tariff);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         // PUT api/<DistrictTariffController>/5
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] DistrictTariff tariff)
         {
-            DistrictTariff tariffDb =await _context.GetWithId(id);
-            if (tariffDb == null) return StatusCode(StatusCodes.Status404NotFound);
-            tariffDb.District = tariff.District;
-            tariffDb.Price = tariff.Price;
-            await _context.Update(tariffDb);
-            return Ok();
+            try
+            {
+                DistrictTariff tariffDb =await _context.GetWithId(id);
+                if (tariffDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                Branch branchDb = await _contextBranch.GetWithId(tariff.BranchId);
+                if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                tariffDb.District = tariff.District;
+                tariffDb.Price = tariff.Price;
+                tariffDb.BranchId = tariff.BranchId;
+                await _context.Update(tariffDb);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         // DELETE api/<DistrictTariffController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            DistrictTariff tariffDb = await _context.GetWithId(id);
-            if (tariffDb == null) return StatusCode(StatusCodes.Status404NotFound);
-            tariffDb.IsDeleted = true;
-            await _context.Update(tariffDb);
-            return Ok();
+            try
+            {
+                DistrictTariff tariffDb = await _context.GetWithId(id);
+                if (tariffDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                tariffDb.IsDeleted = true;
+                await _context.Update(tariffDb);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
     }
 }

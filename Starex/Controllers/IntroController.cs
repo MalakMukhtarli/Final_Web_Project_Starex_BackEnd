@@ -82,7 +82,6 @@ namespace Starex.Controllers
                 dbIntro.Title = intro.Title;
                 await _context.Update(dbIntro);
                 return Ok();
-
             }
             catch (Exception e)
             {
@@ -103,7 +102,6 @@ namespace Starex.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

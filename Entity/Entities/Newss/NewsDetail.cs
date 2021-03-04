@@ -15,7 +15,8 @@ namespace Entity.Entities.Newss
         public IFormFile Photo { get; set; }
         public string Content { get; set; }
         public bool IsDeleted { get; set; }
-        //public virtual News News{ get; set; }
-        //public int NewsId { get; set; }
+        [ForeignKey("News")]
+        public int NewsId { get; set; }
+        public virtual News News { get; set; }
     }
 }

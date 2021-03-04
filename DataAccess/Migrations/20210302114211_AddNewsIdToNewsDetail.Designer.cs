@@ -4,14 +4,16 @@ using DataAccess.Concret;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210302114211_AddNewsIdToNewsDetail")]
+    partial class AddNewsIdToNewsDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Abouts");
                 });
 
-            modelBuilder.Entity("Entity.Entities.Addresses.Address", b =>
+            modelBuilder.Entity("Entity.Entities.Address.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,10 +60,7 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CountryName")
+                    b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -78,8 +77,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Addresses");
                 });
@@ -292,8 +289,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId")
-                        .IsUnique();
+                    b.HasIndex("BranchId");
 
                     b.ToTable("BranchContacts");
                 });
@@ -321,8 +317,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId")
-                        .IsUnique();
+                    b.HasIndex("CountryId");
 
                     b.ToTable("CountryContacts");
                 });
@@ -753,15 +748,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Tariffs");
                 });
 
-            modelBuilder.Entity("Entity.Entities.Addresses.Address", b =>
-                {
-                    b.HasOne("Entity.Entities.Countries.Country", "Country")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Entity.Entities.AppUser", b =>
                 {
                     b.HasOne("Entity.Entities.Branches.Branch", "Branch")
@@ -783,8 +769,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entity.Entities.Contacts.BranchContact", b =>
                 {
                     b.HasOne("Entity.Entities.Branches.Branch", "Branch")
-                        .WithOne("BranchContacts")
-                        .HasForeignKey("Entity.Entities.Contacts.BranchContact", "BranchId")
+                        .WithMany("BranchContacts")
+                        .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -792,8 +778,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entity.Entities.Contacts.CountryContact", b =>
                 {
                     b.HasOne("Entity.Entities.Countries.Country", "Country")
-                        .WithOne("CountryContacts")
-                        .HasForeignKey("Entity.Entities.Contacts.CountryContact", "CountryId")
+                        .WithMany("CountryContacts")
+                        .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -40,6 +40,7 @@ namespace Starex.Extension
         {
             string PhotoName = Guid.NewGuid().ToString() + photo.FileName;
             string path = Path.Combine(root, folder, PhotoName);
+
             using (FileStream fileStream = new FileStream(path, FileMode.Create))
             {
                 await photo.CopyToAsync(fileStream);

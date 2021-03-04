@@ -1,5 +1,5 @@
 ﻿using Entity.Entities;
-using Entity.Entities.Address;
+using Entity.Entities.Addresses;
 using Entity.Entities.Balancess;
 using Entity.Entities.Bios;
 using Entity.Entities.Branches;
@@ -54,14 +54,5 @@ namespace DataAccess.Concret
         public DbSet<Bio> Bios { get; set; }
         public DbSet<Notfication> Notfications { get; set; }
         public DbSet<Store> Stores { get; set; }
-
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<News>()
-        //        .HasOne(b => b.NewsDetail)
-        //        .WithOne(i => i.News)
-        //        .HasForeignKey<NewsDetail>(b => b.NewsId);
-        //}
     }
 }

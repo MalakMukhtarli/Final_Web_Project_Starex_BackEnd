@@ -5967,11 +5967,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
+      "projectPath": "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\DataAccess\\DataAccess.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -5992,11 +5992,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
+            "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\Core\\Core.csproj"
             },
-            "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
-              "projectPath": "C:\\Users\\HP\\Desktop\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
+            "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\HP\\Desktop\\Code Academy\\Final_Web_Project_Starex_BackEnd\\Entity\\Entity.csproj"
             }
           }
         }

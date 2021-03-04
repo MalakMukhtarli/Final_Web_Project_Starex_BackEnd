@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Entity.Entities.Countries;
 using Entity.Entities.Stores;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,13 @@ namespace Starex.Controllers
     {
 
         private readonly IStoreService _context;
+        private readonly ICountryService _contextCountry;
 
-        public StoreController(IStoreService storeService)
+        public StoreController(IStoreService storeService,
+                               ICountryService contextCountry)
         {
             _context = storeService;
+            _contextCountry = contextCountry;
         }
 
         // GET: api/<StoreController>
@@ -46,11 +50,13 @@ namespace Starex.Controllers
             {
                 Store store = await _context.GetWithId(id);
                 if (store == null) return StatusCode(StatusCodes.Status404NotFound);
+                Country country = await _contextCountry.GetWithId(store.CountryId);
+                if (country == null) return StatusCode(StatusCodes.Status404NotFound);
+                store.Country = country;
                 return Ok(store);
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -62,9 +68,9 @@ namespace Starex.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
-
+                Country countryDb = await _contextCountry.GetWithId(store.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 await _context.Add(store);
-
                 return Ok();
             }
             catch (Exception e)
@@ -81,6 +87,8 @@ namespace Starex.Controllers
             {
                 Store dbStore = await _context.GetWithId(id);
                 if (dbStore == null) return BadRequest();
+                Country countryDb = await _contextCountry.GetWithId(store.CountryId);
+                if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
 
                 dbStore.Link = store.Link;
                 dbStore.Name = store.Name;
@@ -90,7 +98,6 @@ namespace Starex.Controllers
 
                 await _context.Update(dbStore);
                 return Ok();
-
             }
             catch (Exception e)
             {
@@ -100,7 +107,7 @@ namespace Starex.Controllers
 
         // DELETE api/<StoreController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id, [FromBody] Store store)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
@@ -114,7 +121,6 @@ namespace Starex.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

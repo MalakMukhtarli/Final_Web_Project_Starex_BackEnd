@@ -20,6 +20,8 @@ namespace Starex.ToDoItems
         public string Password { get; set; }
         [Required, DataType(DataType.Password), Compare(nameof(Password))]
         public string CheckPassword { get; set; }
+        [Required,DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
         [Required]
         public string Gender { get; set; }
         //[Required]

@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Entity.Entities.Addresses;
 using Entity.Entities.Contacts;
 using Entity.Entities.Countries;
 using Entity.Entities.Stores;
@@ -22,15 +23,18 @@ namespace Starex.Controllers
         private readonly ICountryContactService _contextContact;
         private readonly ITariffService _contextTariff;
         private readonly IStoreService _contextStore;
+        private readonly IAddressService _contextAddress;
         public CountryController(ICountryService countryService,
                                  ICountryContactService contextContact,
                                  ITariffService contextTariff,
-                                 IStoreService contextStore)
+                                 IStoreService contextStore,
+                                 IAddressService contextAddress)
         {
             _context = countryService;
             _contextContact = contextContact;
             _contextTariff = contextTariff;
             _contextStore = contextStore;
+            _contextAddress = contextAddress;
         }
         // GET: api/<CountryController>
         [HttpGet]
@@ -55,6 +59,14 @@ namespace Starex.Controllers
             {
                 Country country = await _context.GetWithId(id);
                 if (country == null) return StatusCode(StatusCodes.Status404NotFound);
+                List<CountryContact> countryContacts = await _contextContact.GetAll();
+                foreach (CountryContact contact in countryContacts)
+                {
+                    if (contact.CountryId == country.Id)
+                    {
+                        country.CountryContacts = contact;
+                    }
+                }
                 return Ok(country);
             }
             catch (Exception e)
@@ -72,6 +84,14 @@ namespace Starex.Controllers
                 // SHEKIL UCUN EXTANSION ELAVE OLUNACAQ
                 if (!ModelState.IsValid) return BadRequest();
                 await _context.Add(country);
+                CountryContact contact = new CountryContact
+                {
+                    Address = country.CountryContacts.Address,
+                    Time = country.CountryContacts.Time,
+                    IsDeleted = false,
+                    CountryId = country.Id
+                };
+                await _contextContact.Add(contact);
                 return Ok();
             }
             catch (Exception e)
@@ -88,9 +108,20 @@ namespace Starex.Controllers
             {
                 Country countryDb = await _context.GetWithId(id);
                 if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
-                //countryDb.Image = country.Image;
+                countryDb.Image = country.Image;
                 countryDb.Name = country.Name;
                 countryDb.HasLiquid = country.HasLiquid;
+
+                List<CountryContact> allContacts = await _contextContact.GetAll();
+                foreach (CountryContact contact in allContacts)
+                {
+                    if (contact.CountryId == countryDb.Id)
+                    {
+                        contact.Time = countryDb.CountryContacts.Time;
+                        contact.Address = countryDb.CountryContacts.Address;
+                        await _contextContact.Update(contact);
+                    }
+                }
                 await _context.Update(countryDb);
                 return Ok();
             }
@@ -116,8 +147,17 @@ namespace Starex.Controllers
                     if (contact.CountryId == countryDb.Id)
                     {
                         contact.IsDeleted = true;
+                        await _contextContact.Update(contact);
                     }
-                    await _contextContact.Update(contact);
+                }
+
+                List<Address> allAddress = await _contextAddress.GetAll();
+                foreach (Address address in allAddress)
+                {
+                    if (address.CountryId == countryDb.Id)
+                    {
+                        await _contextContact.Delete(id);
+                    }
                 }
 
                 List<Store> allStores = await _contextStore.GetAll();
@@ -126,8 +166,8 @@ namespace Starex.Controllers
                     if (store.CountryId == countryDb.Id)
                     {
                         store.IsDeleted = true;
+                        await _contextStore.Update(store);
                     }
-                    await _contextStore.Update(store);
                 }
 
                 List<Tariff> allTariffs = await _contextTariff.GetAll();
@@ -136,8 +176,8 @@ namespace Starex.Controllers
                     if (tariff.CountryId == countryDb.Id)
                     {
                         tariff.IsDeleted = true;
+                        await _contextTariff.Update(tariff);
                     }
-                    await _contextTariff.Update(tariff);
                 }
                 // SHEKIL SILMEK YAZILACAQ
                 await _context.Update(countryDb);

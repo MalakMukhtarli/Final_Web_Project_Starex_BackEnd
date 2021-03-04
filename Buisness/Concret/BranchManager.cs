@@ -25,7 +25,7 @@ namespace Buisness.Concret
         {
             return await _branchDal.Get(b => b.Id == id && !b.IsDeleted);
         }
-
+        
         async Task IBranchService.Add(Branch branch)
         {
             await _branchDal.Add(branch);

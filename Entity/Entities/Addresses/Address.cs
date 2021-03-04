@@ -1,10 +1,11 @@
 ﻿using Core.Entities;
+using Entity.Entities.Countries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Entity.Entities.Address
+namespace Entity.Entities.Addresses
 {
     public class Address: IEntity
     {
@@ -19,8 +20,10 @@ namespace Entity.Entities.Address
         [Required]
         public string Zip { get; set; }
         [Required]
-        public string Country { get; set; }
+        public string CountryName { get; set; }
         [Required]
         public string City { get; set; }
+        public int CountryId { get; set; }
+        public Country Country { get; set; }
     }
 }

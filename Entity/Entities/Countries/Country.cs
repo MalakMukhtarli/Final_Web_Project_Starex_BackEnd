@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Entities.Declarations;
 using Entity.Entities.Stores;
+using Entity.Entities.Addresses;
 
 namespace Entity.Entities.Countries
 {
@@ -24,9 +25,9 @@ namespace Entity.Entities.Countries
         [NotMapped]
         public IFormFile Photo { get; set; }
         public virtual ICollection<Tariff> Tariffs { get; set; }
-        public virtual ICollection<CountryContact> CountryContacts { get; set; }
+        public virtual CountryContact CountryContacts { get; set; }
         public virtual ICollection<Declaration> Declarations { get; set; }
         public virtual ICollection<Store> Stores { get; set; }
-
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

@@ -16,24 +16,47 @@ namespace Starex.Controllers
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionService _context;
+        private readonly IQuestionNavbarService _contextNavbar;
 
-        public QuestionController(IQuestionService questionService)
+        public QuestionController(IQuestionService questionService,
+                                  IQuestionNavbarService contextNavbar)
         {
             _context = questionService;
+            _contextNavbar = contextNavbar;
         }
 
         // GET: api/<QuestionController>
         [HttpGet]
         public async Task<ActionResult<List<Question>>> Get()
         {
-            return await _context.GetAll();
+            try
+            {
+                List<Question> questions = await _context.GetAll();
+                return Ok(questions);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         // GET api/<QuestionController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Question>> Get(int id)
         {
-            return await _context.GetWithId(id);
+            try
+            {
+                Question question = await _context.GetWithId(id);
+                if (question == null) return StatusCode(StatusCodes.Status404NotFound);
+                QuestionNavbar navbars = await _contextNavbar.GetWithId(question.QuestionNavbarId);
+                if(navbars==null)return StatusCode(StatusCodes.Status404NotFound);
+                question.QuestionNavbar = navbars;
+                return Ok(question);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         // POST api/<QuestionController>
@@ -43,6 +66,9 @@ namespace Starex.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
+                QuestionNavbar navbaDb = await _contextNavbar.GetWithId(question.QuestionNavbarId);
+                if (navbaDb == null) return StatusCode(StatusCodes.Status404NotFound);
+
                 await _context.Add(question);
                 return Ok();
             }
@@ -60,8 +86,13 @@ namespace Starex.Controllers
             {
                 Question dbQuestion = await _context.GetWithId(id);
                 if (dbQuestion == null) return BadRequest();
+                QuestionNavbar navbaDb = await _contextNavbar.GetWithId(question.QuestionNavbarId);
+                if (navbaDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                dbQuestion.AskedQuestion = question.AskedQuestion;
+                dbQuestion.ResponseQuestion = question.ResponseQuestion;
+                dbQuestion.QuestionNavbarId = question.QuestionNavbarId;
 
-               await _context.Update(dbQuestion);
+                await _context.Update(dbQuestion);
                 return Ok();
             }
             catch (Exception ex)
@@ -80,7 +111,7 @@ namespace Starex.Controllers
                 if (dbQuestion == null) return BadRequest();
                 dbQuestion.IsDelete = true;
 
-               await _context.Update(dbQuestion);
+                await _context.Update(dbQuestion);
                 return Ok();
             }
             catch (Exception ex)
