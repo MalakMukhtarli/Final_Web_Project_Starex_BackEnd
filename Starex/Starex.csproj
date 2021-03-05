@@ -6,6 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210225135733_AllModelsTable.cs" />
+    <Compile Remove="Migrations\20210225135733_AllModelsTable.Designer.cs" />
+    <Compile Remove="Migrations\20210304180738_MyIdentityDbContextChange.cs" />
+    <Compile Remove="Migrations\20210304180738_MyIdentityDbContextChange.Designer.cs" />
+    <Compile Remove="Migrations\20210304181527_MyIdentityDbContextChange.cs" />
+    <Compile Remove="Migrations\20210304181527_MyIdentityDbContextChange.Designer.cs" />
+    <Compile Remove="Migrations\20210304182320_IdentityTables.cs" />
+    <Compile Remove="Migrations\20210304182320_IdentityTables.Designer.cs" />
+    <Compile Remove="Migrations\20210305073512_IdentityTables.cs" />
+    <Compile Remove="Migrations\20210305073512_IdentityTables.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
       <PrivateAssets>all</PrivateAssets>
@@ -21,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 

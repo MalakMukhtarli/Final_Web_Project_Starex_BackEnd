@@ -391,45 +391,45 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "AppUser",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    NormalizedUserName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    NormalizedEmail = table.Column<string>(nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Surname = table.Column<string>(nullable: false),
-                    Gender = table.Column<string>(nullable: false),
-                    Birthday = table.Column<DateTime>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
-                    PassportId = table.Column<int>(nullable: false),
-                    FinCode = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    BranchId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUser", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AppUser_Branches_BranchId",
-                        column: x => x.BranchId,
-                        principalTable: "Branches",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            //migrationBuilder.CreateTable(
+            //    name: "AppUser",
+            //    columns: table => new
+            //    {
+            //        Id = table.Column<string>(nullable: false),
+            //        UserName = table.Column<string>(nullable: true),
+            //        NormalizedUserName = table.Column<string>(nullable: true),
+            //        Email = table.Column<string>(nullable: true),
+            //        NormalizedEmail = table.Column<string>(nullable: true),
+            //        EmailConfirmed = table.Column<bool>(nullable: false),
+            //        PasswordHash = table.Column<string>(nullable: true),
+            //        SecurityStamp = table.Column<string>(nullable: true),
+            //        ConcurrencyStamp = table.Column<string>(nullable: true),
+            //        PhoneNumber = table.Column<string>(nullable: true),
+            //        PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+            //        TwoFactorEnabled = table.Column<bool>(nullable: false),
+            //        LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+            //        LockoutEnabled = table.Column<bool>(nullable: false),
+            //        AccessFailedCount = table.Column<int>(nullable: false),
+            //        Name = table.Column<string>(nullable: false),
+            //        Surname = table.Column<string>(nullable: false),
+            //        Gender = table.Column<string>(nullable: false),
+            //        Birthday = table.Column<DateTime>(nullable: false),
+            //        Address = table.Column<string>(nullable: false),
+            //        PassportId = table.Column<int>(nullable: false),
+            //        FinCode = table.Column<string>(nullable: false),
+            //        IsDeleted = table.Column<bool>(nullable: false),
+            //        BranchId = table.Column<int>(nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_AppUser", x => x.Id);
+            //        table.ForeignKey(
+            //            name: "FK_AppUser_Branches_BranchId",
+            //            column: x => x.BranchId,
+            //            principalTable: "Branches",
+            //            principalColumn: "Id",
+            //            onDelete: ReferentialAction.Cascade);
+            //    });
 
             migrationBuilder.CreateTable(
                 name: "BranchContacts",
@@ -477,10 +477,10 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_AppUser_BranchId",
-                table: "AppUser",
-                column: "BranchId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_AppUser_BranchId",
+            //    table: "AppUser",
+            //    column: "BranchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BranchContacts_BranchId",
@@ -534,8 +534,8 @@ namespace DataAccess.Migrations
             migrationBuilder.DropTable(
                 name: "Advantages");
 
-            migrationBuilder.DropTable(
-                name: "AppUser");
+            //migrationBuilder.DropTable(
+            //    name: "AppUser");
 
             migrationBuilder.DropTable(
                 name: "Balances");

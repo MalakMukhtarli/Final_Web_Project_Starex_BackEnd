@@ -39,6 +39,8 @@
     <Compile Remove="Migrations\20210223065204_AllModelsTable.Designer.cs" />
     <Compile Remove="Migrations\20210304070614_updateNewsTable.cs" />
     <Compile Remove="Migrations\20210304070614_updateNewsTable.Designer.cs" />
+    <Compile Remove="Migrations\20210305092448_TitleTables.cs" />
+    <Compile Remove="Migrations\20210305092448_TitleTables.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

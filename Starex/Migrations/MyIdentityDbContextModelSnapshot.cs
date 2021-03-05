@@ -192,7 +192,8 @@ namespace Starex.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
+                    b.HasIndex("BranchId")
+                        .IsUnique();
 
                     b.ToTable("BranchContact");
                 });
@@ -376,8 +377,8 @@ namespace Starex.Migrations
             modelBuilder.Entity("Entity.Entities.Contacts.BranchContact", b =>
                 {
                     b.HasOne("Entity.Entities.Branches.Branch", "Branch")
-                        .WithMany("BranchContacts")
-                        .HasForeignKey("BranchId")
+                        .WithOne("BranchContacts")
+                        .HasForeignKey("Entity.Entities.Contacts.BranchContact", "BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

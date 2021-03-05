@@ -10,8 +10,8 @@ using Starex.Identity;
 namespace Starex.Migrations
 {
     [DbContext(typeof(MyIdentityDbContext))]
-    [Migration("20210225135733_AllModelsTable")]
-    partial class AllModelsTable
+    [Migration("20210305075738_IdentityTables")]
+    partial class IdentityTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -194,7 +194,8 @@ namespace Starex.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
+                    b.HasIndex("BranchId")
+                        .IsUnique();
 
                     b.ToTable("BranchContact");
                 });
@@ -378,8 +379,8 @@ namespace Starex.Migrations
             modelBuilder.Entity("Entity.Entities.Contacts.BranchContact", b =>
                 {
                     b.HasOne("Entity.Entities.Branches.Branch", "Branch")
-                        .WithMany("BranchContacts")
-                        .HasForeignKey("BranchId")
+                        .WithOne("BranchContacts")
+                        .HasForeignKey("Entity.Entities.Contacts.BranchContact", "BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

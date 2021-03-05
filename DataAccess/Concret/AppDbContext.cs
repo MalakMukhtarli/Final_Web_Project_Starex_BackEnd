@@ -15,6 +15,7 @@ using Entity.Entities.Questions;
 using Entity.Entities.Service;
 using Entity.Entities.Stores;
 using Entity.Entities.Tariffs;
+using Entity.Entities.Titles;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -54,5 +55,6 @@ namespace DataAccess.Concret
         public DbSet<Bio> Bios { get; set; }
         public DbSet<Notfication> Notfications { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public DbSet<Title> Titles { get; set; }
     }
 }

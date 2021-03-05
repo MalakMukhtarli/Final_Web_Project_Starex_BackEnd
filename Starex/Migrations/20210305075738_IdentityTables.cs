@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Starex.Migrations
 {
-    public partial class AllModelsTable : Migration
+    public partial class IdentityTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,19 +21,19 @@ namespace Starex.Migrations
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "City",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_City", x => x.Id);
-                });
+            //migrationBuilder.CreateTable(
+            //    name: "City",
+            //    columns: table => new
+            //    {
+            //        Id = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        Name = table.Column<string>(nullable: false),
+            //        IsDeleted = table.Column<bool>(nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_City", x => x.Id);
+            //    });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -56,26 +56,26 @@ namespace Starex.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Branch",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CityId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Branch", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Branch_City_CityId",
-                        column: x => x.CityId,
-                        principalTable: "City",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            //migrationBuilder.CreateTable(
+            //    name: "Branch",
+            //    columns: table => new
+            //    {
+            //        Id = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        Name = table.Column<string>(nullable: false),
+            //        IsDeleted = table.Column<bool>(nullable: false),
+            //        CityId = table.Column<int>(nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_Branch", x => x.Id);
+            //        table.ForeignKey(
+            //            name: "FK_Branch_City_CityId",
+            //            column: x => x.CityId,
+            //            principalTable: "City",
+            //            principalColumn: "Id",
+            //            onDelete: ReferentialAction.Cascade);
+            //    });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
@@ -110,58 +110,58 @@ namespace Starex.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Branch_BranchId",
+                        name: "FK_AspNetUsers_Branches_BranchId",
                         column: x => x.BranchId,
-                        principalTable: "Branch",
+                        principalTable: "Branches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "BranchContact",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Address = table.Column<string>(nullable: false),
-                    Phone = table.Column<string>(nullable: false),
-                    Time = table.Column<string>(nullable: false),
-                    Map = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    BranchId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BranchContact", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BranchContact_Branch_BranchId",
-                        column: x => x.BranchId,
-                        principalTable: "Branch",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            //migrationBuilder.CreateTable(
+            //    name: "BranchContact",
+            //    columns: table => new
+            //    {
+            //        Id = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        Address = table.Column<string>(nullable: false),
+            //        Phone = table.Column<string>(nullable: false),
+            //        Time = table.Column<string>(nullable: false),
+            //        Map = table.Column<string>(nullable: false),
+            //        IsDeleted = table.Column<bool>(nullable: false),
+            //        BranchId = table.Column<int>(nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_BranchContact", x => x.Id);
+            //        table.ForeignKey(
+            //            name: "FK_BranchContact_Branch_BranchId",
+            //            column: x => x.BranchId,
+            //            principalTable: "Branch",
+            //            principalColumn: "Id",
+            //            onDelete: ReferentialAction.Cascade);
+            //    });
 
-            migrationBuilder.CreateTable(
-                name: "DistrictTariff",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    District = table.Column<string>(nullable: false),
-                    Price = table.Column<double>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    BranchId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DistrictTariff", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DistrictTariff_Branch_BranchId",
-                        column: x => x.BranchId,
-                        principalTable: "Branch",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            //migrationBuilder.CreateTable(
+            //    name: "DistrictTariff",
+            //    columns: table => new
+            //    {
+            //        Id = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        District = table.Column<string>(nullable: false),
+            //        Price = table.Column<double>(nullable: false),
+            //        IsDeleted = table.Column<bool>(nullable: false),
+            //        BranchId = table.Column<int>(nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_DistrictTariff", x => x.Id);
+            //        table.ForeignKey(
+            //            name: "FK_DistrictTariff_Branch_BranchId",
+            //            column: x => x.BranchId,
+            //            principalTable: "Branch",
+            //            principalColumn: "Id",
+            //            onDelete: ReferentialAction.Cascade);
+            //    });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
@@ -292,20 +292,21 @@ namespace Starex.Migrations
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Branch_CityId",
-                table: "Branch",
-                column: "CityId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Branch_CityId",
+            //    table: "Branch",
+            //    column: "CityId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_BranchContact_BranchId",
-                table: "BranchContact",
-                column: "BranchId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_BranchContact_BranchId",
+            //    table: "BranchContact",
+            //    column: "BranchId",
+            //    unique: true);
 
-            migrationBuilder.CreateIndex(
-                name: "IX_DistrictTariff_BranchId",
-                table: "DistrictTariff",
-                column: "BranchId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_DistrictTariff_BranchId",
+            //    table: "DistrictTariff",
+            //    column: "BranchId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -325,11 +326,11 @@ namespace Starex.Migrations
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
 
-            migrationBuilder.DropTable(
-                name: "BranchContact");
+            //migrationBuilder.DropTable(
+            //    name: "BranchContact");
 
-            migrationBuilder.DropTable(
-                name: "DistrictTariff");
+            //migrationBuilder.DropTable(
+            //    name: "DistrictTariff");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -337,11 +338,11 @@ namespace Starex.Migrations
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.DropTable(
-                name: "Branch");
+            //migrationBuilder.DropTable(
+            //    name: "Branch");
 
-            migrationBuilder.DropTable(
-                name: "City");
+            //migrationBuilder.DropTable(
+            //    name: "City");
         }
     }
 }
