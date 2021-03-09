@@ -4,11 +4,15 @@ using Entity.Entities.Contacts;
 using Entity.Entities.Countries;
 using Entity.Entities.Stores;
 using Entity.Entities.Tariffs;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Starex.Extension;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,17 +28,20 @@ namespace Starex.Controllers
         private readonly ITariffService _contextTariff;
         private readonly IStoreService _contextStore;
         private readonly IAddressService _contextAddress;
+        private readonly IWebHostEnvironment _env;
         public CountryController(ICountryService countryService,
                                  ICountryContactService contextContact,
                                  ITariffService contextTariff,
                                  IStoreService contextStore,
-                                 IAddressService contextAddress)
+                                 IAddressService contextAddress,
+                                 IWebHostEnvironment env)
         {
             _context = countryService;
             _contextContact = contextContact;
             _contextTariff = contextTariff;
             _contextStore = contextStore;
             _contextAddress = contextAddress;
+            _env = env; 
         }
         // GET: api/<CountryController>
         [HttpGet]
@@ -83,21 +90,30 @@ namespace Starex.Controllers
             {
                 // SHEKIL UCUN EXTANSION ELAVE OLUNACAQ
                 if (!ModelState.IsValid) return BadRequest();
-                await _context.Add(country);
-                CountryContact contact = new CountryContact
-                {
-                    Address = country.CountryContacts.Address,
-                    Time = country.CountryContacts.Time,
-                    IsDeleted = false,
-                    CountryId = country.Id
-                };
-                await _contextContact.Add(contact);
+                
+                //var stream = photo.OpenReadStream();
+                //await photo.AddImageAsync(_env.WebRootPath, "img");
+
+                //await _context.Add(country);
+                //CountryContact contact = new CountryContact
+                //{
+                //    Address = country.CountryContacts.Address,
+                //    Time = country.CountryContacts.Time,
+                //    IsDeleted = false,
+                //    CountryId = country.Id
+                //};
+                //await _contextContact.Add(contact);
                 return Ok();
             }
             catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
+        }
+        public async Task ImgSave([FromForm] IFormFile photo)
+        {
+            photo.OpenReadStream();
+            string photoName = await photo.AddImageAsync(_env.WebRootPath, "img");
         }
 
         // PUT api/<CountryController>/5

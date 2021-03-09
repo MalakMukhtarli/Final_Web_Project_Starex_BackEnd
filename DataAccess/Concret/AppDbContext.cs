@@ -16,7 +16,6 @@ using Entity.Entities.Service;
 using Entity.Entities.Stores;
 using Entity.Entities.Tariffs;
 using Entity.Entities.Titles;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
