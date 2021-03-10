@@ -3,6 +3,7 @@ using Entity.Entities.Bios;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Starex.Extension;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -57,11 +58,18 @@ namespace Starex.Controllers
 
         // POST api/<BiosController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Bio bio)
+        public async Task<ActionResult> Post([FromForm] Bio bio)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
+                if (!bio.LogoFooter.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                if (!bio.LogoHeader.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                if (!bio.LogoFooter.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                if (!bio.LogoHeader.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                bio.LogoFooterImage = await bio.LogoFooter.AddImageAsync(_env.WebRootPath, "img");
+                bio.LogoHeaderImage = await bio.LogoHeader.AddImageAsync(_env.WebRootPath, "img");
+
                 await _context.Add(bio);
                 return Ok();
             }
@@ -73,19 +81,31 @@ namespace Starex.Controllers
 
         // PUT api/<BiosController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] Bio bio)
+        public async Task<ActionResult> Put(int id, [FromForm] Bio bio)
         {
             try
             {
                 Bio dbBio = await _context.GetWithId(id);
                 if(dbBio == null) return BadRequest();
+                if (bio.LogoHeaderImage == null) return BadRequest();
+                if (bio.LogoFooterImage == null) return BadRequest();
 
                 dbBio.Address = bio.Address;
                 dbBio.Contact = bio.Contact;
                 dbBio.WorkTime = bio.WorkTime;
 
-                //Will be image
-                if (bio.PhotoHeader == null) return BadRequest();
+                if (bio.LogoFooter!=null)
+                {
+                    if (!bio.LogoFooter.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                    if (!bio.LogoFooter.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                    dbBio.LogoFooterImage = await bio.LogoFooter.AddImageAsync(_env.WebRootPath, "img");
+                }
+                if (bio.LogoHeader != null)
+                {
+                    if (!bio.LogoHeader.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                    if (!bio.LogoHeader.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                    dbBio.LogoHeaderImage = await bio.LogoHeader.AddImageAsync(_env.WebRootPath, "img");
+                }
 
                 return Ok();
 

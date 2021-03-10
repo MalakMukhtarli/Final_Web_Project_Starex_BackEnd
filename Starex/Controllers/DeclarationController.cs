@@ -1,8 +1,10 @@
 ﻿using Buisness.Abstract;
 using Entity.Entities.Countries;
 using Entity.Entities.Declarations;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Starex.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +20,14 @@ namespace Starex.Controllers
     {
         private readonly IDeclarationService _context;
         private readonly ICountryService _contextCountry;
+        private readonly IWebHostEnvironment _env;
         public DeclarationController(IDeclarationService context,
-                                     ICountryService contextCountry)
+                                     ICountryService contextCountry,
+                                     IWebHostEnvironment env)
         {
             _context = context;
             _contextCountry = contextCountry;
+            _env = env;
         }
         // GET: api/<DeclarationController>
         [HttpGet]
@@ -66,13 +71,16 @@ namespace Starex.Controllers
 
         // POST api/<DeclarationController>
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] Declaration declaration)
+        public async Task<ActionResult> Create([FromForm] Declaration declaration)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
                 Country countryDb = await _contextCountry.GetWithId(declaration.CountryId);
                 if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                if (!declaration.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                if (!declaration.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                declaration.Image = await declaration.Photo.AddImageAsync(_env.WebRootPath, "img");
                 await _context.Add(declaration);    
                 return Ok();
             }
@@ -84,7 +92,7 @@ namespace Starex.Controllers
 
         // PUT api/<DeclarationController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] Declaration declaration)
+        public async Task<ActionResult> Update(int id, [FromForm] Declaration declaration)
         {
             try
             {
@@ -100,8 +108,12 @@ namespace Starex.Controllers
                 declarationDb.TrackingNumber = declaration.TrackingNumber;
                 declarationDb.CountryId = declaration.CountryId;
 
-            
-                // PHOTO  yazilacaq
+                if (declaration.Photo != null)
+                {
+                    if (!declaration.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                    if (!declaration.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                    declarationDb.Image = await declaration.Photo.AddImageAsync(_env.WebRootPath, "img");
+                }
                 await _context.Update(declarationDb);
                 return Ok();
             }
@@ -120,7 +132,6 @@ namespace Starex.Controllers
                 Declaration declarationDb = await _context.GetWithId(id);
                 if (declarationDb == null) return StatusCode(StatusCodes.Status404NotFound);
                 declarationDb.IsDeleted = true;
-                // PHOTO  yazilacaq
 
                 await _context.Update(declarationDb);
                 return Ok();

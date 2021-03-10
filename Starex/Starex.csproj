@@ -16,6 +16,10 @@
     <Compile Remove="Migrations\20210304182320_IdentityTables.Designer.cs" />
     <Compile Remove="Migrations\20210305073512_IdentityTables.cs" />
     <Compile Remove="Migrations\20210305073512_IdentityTables.Designer.cs" />
+    <Compile Remove="Migrations\20210310062351_AddBalanceIdColumnToAppUserTable.cs" />
+    <Compile Remove="Migrations\20210310062351_AddBalanceIdColumnToAppUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20210310150544_AddBalanceIdColumnToAppUserTable.cs" />
+    <Compile Remove="Migrations\20210310150544_AddBalanceIdColumnToAppUserTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

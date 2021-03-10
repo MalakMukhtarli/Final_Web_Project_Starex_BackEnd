@@ -12,8 +12,8 @@ namespace Entity.Entities.Stores
     {
         public int Id { get; set; }
         [NotMapped]
-        public IFormFile Image { get; set; }
-        public string Photo { get; set; }
+        public IFormFile Photo { get; set; }
+        public string Image { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
         public bool IsDeleted { get; set; }

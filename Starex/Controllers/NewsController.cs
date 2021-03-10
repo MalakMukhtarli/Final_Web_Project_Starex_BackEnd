@@ -1,7 +1,9 @@
 ﻿using Buisness.Abstract;
 using Entity.Entities.Newss;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Starex.Extension;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,10 +17,16 @@ namespace Starex.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _context;
+        private readonly INewsDetailService _contextDetail;
+        private readonly IWebHostEnvironment _env;
 
-        public NewsController(INewsService context)
+        public NewsController(INewsService context,
+                              INewsDetailService contextDetail,
+                              IWebHostEnvironment env)
         {
             _context = context;
+            _contextDetail = contextDetail;
+            _env = env;
         }
         // GET: api/<NewsController>
         [HttpGet]
@@ -43,6 +51,14 @@ namespace Starex.Controllers
             {
                 News news = await _context.GetWithId(id);
                 if (news == null) return StatusCode(StatusCodes.Status404NotFound);
+                List<NewsDetail> newsDetails = await _contextDetail.GetAll();
+                foreach (NewsDetail detail in newsDetails)
+                {
+                    if (news.Id == detail.NewsId)
+                    {
+                        news.NewsDetail = detail;
+                    }
+                }
                 return Ok();
             }
             catch (Exception ex)
@@ -58,7 +74,19 @@ namespace Starex.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
+                if (!news.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                if (!news.NewsDetail.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                if (!news.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                if (!news.NewsDetail.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                news.Image = await news.Photo.AddImageAsync(_env.WebRootPath, "img");
+                news.NewsDetail.ImageBig = await news.NewsDetail.Photo.AddImageAsync(_env.WebRootPath, "img");
                 await _context.Add(news);
+                NewsDetail detail = new NewsDetail
+                {
+                    Content=news.NewsDetail.Content,
+                    ImageBig=news.NewsDetail.ImageBig                    
+                };
+                await _contextDetail.Add(detail);
                 return Ok();
             }
             catch (Exception ex)
@@ -80,7 +108,28 @@ namespace Starex.Controllers
                 dbNews.Date = news.Date;
                 news.CreatedTime = DateTime.Now;
                 dbNews.CreatedTime = news.CreatedTime;
-                //will be image extention
+                if (news.Photo!=null)
+                {
+                    if (!news.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                    if (!news.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                    dbNews.Image = await news.Photo.AddImageAsync(_env.WebRootPath, "img");
+                }
+                if (news.NewsDetail.Photo != null)
+                {
+                    if (!news.NewsDetail.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                    if (!news.NewsDetail.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                    dbNews.NewsDetail.ImageBig = await news.NewsDetail.Photo.AddImageAsync(_env.WebRootPath, "img");
+                }
+                List<NewsDetail> allDetail = await _contextDetail.GetAll();
+                foreach (NewsDetail detail in allDetail)
+                {
+                    if (detail.NewsId == dbNews.Id)
+                    {
+                        detail.Content = dbNews.NewsDetail.Content;
+                        detail.ImageBig = dbNews.NewsDetail.ImageBig;
+                        await _contextDetail.Update(detail);
+                    }
+                }
                 await _context.Update(dbNews);
                 return Ok();
             }
@@ -99,8 +148,9 @@ namespace Starex.Controllers
                 News dbNews = await _context.GetWithId(id);
                 if (dbNews == null) return BadRequest();
                 dbNews.IsDeleted = true;
-                //dbNews.NewsDetail.IsDeleted = true;
+                dbNews.NewsDetail.IsDeleted = true;
                 await _context.Update(dbNews);
+                await _contextDetail.Update(dbNews.NewsDetail);
                 return Ok();
             }
             catch (Exception ex)

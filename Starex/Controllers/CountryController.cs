@@ -84,14 +84,14 @@ namespace Starex.Controllers
 
         // POST api/<CountryController>
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] Country country)
+        public async Task<ActionResult> Create([FromForm] Country country)
         {
             try
             {
-                // SHEKIL UCUN EXTANSION ELAVE OLUNACAQ
                 if (!ModelState.IsValid) return BadRequest();
-                //var stream = photo.OpenReadStream();
-                //await photo.AddImageAsync(_env.WebRootPath, "img");
+                if (!country.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                if (!country.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                country.Image = await country.Photo.AddImageAsync(_env.WebRootPath, "img");
 
                 await _context.Add(country);
                 CountryContact contact = new CountryContact
@@ -109,24 +109,23 @@ namespace Starex.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
-        public async Task<string> ImgSave([FromForm] IFormFile photo)
-        {
-            photo.OpenReadStream();
-            string photoName = await photo.AddImageAsync(_env.WebRootPath, "img");
-            return photoName;
-        }
 
         // PUT api/<CountryController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] Country country)
+        public async Task<ActionResult> Update(int id, [FromForm] Country country)
         {
             try
             {
                 Country countryDb = await _context.GetWithId(id);
                 if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
-                countryDb.Image = country.Image;
                 countryDb.Name = country.Name;
                 countryDb.HasLiquid = country.HasLiquid;
+                if (country.Photo != null)
+                {
+                    if (!country.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                    if (!country.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                    countryDb.Image = await country.Photo.AddImageAsync(_env.WebRootPath, "img");
+                }
 
                 List<CountryContact> allContacts = await _contextContact.GetAll();
                 foreach (CountryContact contact in allContacts)

@@ -1,8 +1,10 @@
 ﻿using Buisness.Abstract;
 using Entity.Entities.Countries;
 using Entity.Entities.Stores;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Starex.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +21,15 @@ namespace Starex.Controllers
 
         private readonly IStoreService _context;
         private readonly ICountryService _contextCountry;
+        private readonly IWebHostEnvironment _env;
 
         public StoreController(IStoreService storeService,
-                               ICountryService contextCountry)
+                               ICountryService contextCountry,
+                               IWebHostEnvironment env)
         {
             _context = storeService;
             _contextCountry = contextCountry;
+            _env = env;
         }
 
         // GET: api/<StoreController>
@@ -63,13 +68,16 @@ namespace Starex.Controllers
 
         // POST api/<StoreController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Store store)
+        public async Task<ActionResult> Post([FromForm] Store store)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
                 Country countryDb = await _contextCountry.GetWithId(store.CountryId);
                 if (countryDb == null) return StatusCode(StatusCodes.Status404NotFound);
+                if (!store.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                if (!store.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                store.Image = await store.Photo.AddImageAsync(_env.WebRootPath, "img");
                 await _context.Add(store);
                 return Ok();
             }
@@ -81,7 +89,7 @@ namespace Starex.Controllers
 
         // PUT api/<StoreController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] Store store)
+        public async Task<ActionResult> Put(int id, [FromForm] Store store)
         {
             try
             {
@@ -94,7 +102,12 @@ namespace Starex.Controllers
                 dbStore.Name = store.Name;
                 dbStore.CountryId = store.CountryId;
 
-                //will be image
+                if (store.Photo != null)
+                {
+                    if (!store.Photo.IsImage()) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+                    if (!store.Photo.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
+                    dbStore.Image = await store.Photo.AddImageAsync(_env.WebRootPath, "img");
+                }
 
                 await _context.Update(dbStore);
                 return Ok();

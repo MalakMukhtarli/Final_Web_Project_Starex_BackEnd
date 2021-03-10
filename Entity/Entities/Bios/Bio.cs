@@ -12,9 +12,10 @@ namespace Entity.Entities.Bios
         public int Id { get; set; }
         [NotMapped]
         public IFormFile LogoHeader { get; set; }
-        public string PhotoHeader { get; set; }
+        public string LogoHeaderImage { get; set; }
         [NotMapped]
         public IFormFile LogoFooter { get; set; }
+        public string LogoFooterImage { get; set; }
         public string WorkTime { get; set; }
         public string Address { get; set; }
         public string Contact { get; set; }

@@ -37,21 +37,5 @@ namespace Starex.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
-
-        // POST api/<ImageController>
-        [HttpPost]
-        public async Task<IActionResult> Post([FromForm] IFormFile photo)
-        {
-            try
-            {
-                photo.OpenReadStream();
-                string photoName = await photo.AddImageAsync(_env.WebRootPath, "img");
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
-            }
-        }
     }
 }
