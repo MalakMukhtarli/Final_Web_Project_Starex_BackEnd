@@ -33,5 +33,6 @@ namespace Starex.ToDoItems
         [Required]
         public string FinCode { get; set; }
         public int BranchId { get; set; }
+        public int BalanceId { get; set; }
     }
 }

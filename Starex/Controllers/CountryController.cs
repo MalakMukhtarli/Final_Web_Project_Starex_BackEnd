@@ -90,19 +90,18 @@ namespace Starex.Controllers
             {
                 // SHEKIL UCUN EXTANSION ELAVE OLUNACAQ
                 if (!ModelState.IsValid) return BadRequest();
-                
                 //var stream = photo.OpenReadStream();
                 //await photo.AddImageAsync(_env.WebRootPath, "img");
 
-                //await _context.Add(country);
-                //CountryContact contact = new CountryContact
-                //{
-                //    Address = country.CountryContacts.Address,
-                //    Time = country.CountryContacts.Time,
-                //    IsDeleted = false,
-                //    CountryId = country.Id
-                //};
-                //await _contextContact.Add(contact);
+                await _context.Add(country);
+                CountryContact contact = new CountryContact
+                {
+                    Address = country.CountryContacts.Address,
+                    Time = country.CountryContacts.Time,
+                    IsDeleted = false,
+                    CountryId = country.Id
+                };
+                await _contextContact.Add(contact);
                 return Ok();
             }
             catch (Exception e)
@@ -110,10 +109,11 @@ namespace Starex.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
-        public async Task ImgSave([FromForm] IFormFile photo)
+        public async Task<string> ImgSave([FromForm] IFormFile photo)
         {
             photo.OpenReadStream();
             string photoName = await photo.AddImageAsync(_env.WebRootPath, "img");
+            return photoName;
         }
 
         // PUT api/<CountryController>/5

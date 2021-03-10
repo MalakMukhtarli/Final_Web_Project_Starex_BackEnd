@@ -1,5 +1,6 @@
 ﻿using Buisness.Abstract;
 using Entity.Entities;
+using Entity.Entities.Balancess;
 using Entity.Entities.Branches;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -25,15 +26,18 @@ namespace Starex.Controllers
     public class AuthenticateController : ControllerBase
     {
         private readonly IBranchService _contextBranch;
+        private readonly IBalanceService _contextBalance;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         public IConfiguration Configuration { get; }
         public AuthenticateController(UserManager<AppUser> userManager,
                                       RoleManager<IdentityRole> roleManager,
                                       IConfiguration configuration,
-                                      IBranchService contextBranch)
+                                      IBranchService contextBranch,
+                                      IBalanceService contextBalance)
         {
             _contextBranch = contextBranch;
+            _contextBalance = contextBalance;
             _userManager = userManager;
             _roleManager = roleManager;
             Configuration = configuration;
@@ -50,6 +54,14 @@ namespace Starex.Controllers
             if (isExistEmail != null) return StatusCode(StatusCodes.Status403Forbidden);
             Branch branchDb = await _contextBranch.GetWithId(register.BranchId);
             if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
+            Balance balance = new Balance
+            {
+                Price = 0,
+                Currency = null,
+                MyBalance = 0
+            };
+            await _contextBalance.Add(balance);
+
             AppUser newUser = new AppUser
             {
                 Name = register.Name,
@@ -63,9 +75,9 @@ namespace Starex.Controllers
                 FinCode = register.FinCode,
                 IsDeleted = false,
                 UserName = register.Email,
-                BranchId = register.BranchId
+                BranchId = register.BranchId,
+                BalanceId = balance.Id
             };
-
             IdentityResult result = await _userManager.CreateAsync(newUser, register.Password);
             if (!result.Succeeded) return StatusCode(StatusCodes.Status403Forbidden);
             await _userManager.AddToRoleAsync(newUser, Roles.Admin.ToString());
@@ -111,7 +123,7 @@ namespace Starex.Controllers
                 var token = new JwtSecurityToken(
                     issuer: Configuration["JWT:ValidIssuer"],
                     audience: Configuration["JWT:ValidAudience"],
-                    expires: DateTime.Now.AddMinutes(30),
+                    expires: DateTime.Now.AddMinutes(60),
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(signInKey, SecurityAlgorithms.HmacSha256)
                 );

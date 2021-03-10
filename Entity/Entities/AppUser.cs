@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Entity.Entities.Balancess;
 using Entity.Entities.Branches;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -28,5 +29,8 @@ namespace Entity.Entities
         public bool IsDeleted { get; set; }
         public int BranchId { get; set; }
         public Branch Branch { get; set; }
+        [ForeignKey("Balance")]
+        public int BalanceId { get; set; }
+        public Balance Balance { get; set; }
     }
 }
