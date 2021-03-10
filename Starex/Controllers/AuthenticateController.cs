@@ -26,15 +26,20 @@ namespace Starex.Controllers
     public class AuthenticateController : ControllerBase
     {
         private readonly IBranchService _contextBranch;
+        private readonly IBalanceService _contextBalance;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         public IConfiguration Configuration { get; }
+        public static int UserNameCode = 15200;
+
         public AuthenticateController(UserManager<AppUser> userManager,
                                       RoleManager<IdentityRole> roleManager,
                                       IConfiguration configuration,
-                                      IBranchService contextBranch)
+                                      IBranchService contextBranch,
+                                      IBalanceService contextBalance)
         {
             _contextBranch = contextBranch;
+            _contextBalance = contextBalance;
             _userManager = userManager;
             _roleManager = roleManager;
             Configuration = configuration;
@@ -51,30 +56,32 @@ namespace Starex.Controllers
             if (isExistEmail != null) return StatusCode(StatusCodes.Status403Forbidden);
             Branch branchDb = await _contextBranch.GetWithId(register.BranchId);
             if (branchDb == null) return StatusCode(StatusCodes.Status404NotFound);
-            //Balance balance = new Balance
-            //{
-            //    Price = 0,
-            //    Currency = null,
-            //    MyBalance = 0
-            //};
-            //await _contextBalance.Add(balance);
 
+            Balance balance = new Balance
+            {
+                Price = register.Balance.Price,
+                Currency = register.Balance.Currency,
+                MyBalance = register.Balance.MyBalance
+            };
+            await _contextBalance.Add(balance);
+            UserNameCode += 20;
             AppUser newUser = new AppUser
             {
                 Name = register.Name,
                 Surname = register.Surname,
                 Email = register.Email,
-                PhoneNumber=register.Phone,
+                PhoneNumber = register.Phone,
                 Gender = register.Gender,
                 Birthday = register.Birthday,
                 Address = register.Address,
                 PassportId = register.PassportId,
                 FinCode = register.FinCode,
                 IsDeleted = false,
-                UserName = $"{15200+50}",
+                UserName = $"{UserNameCode}",
                 BranchId = register.BranchId,
-                //BalanceId = balance.Id
+                BalanceId = balance.Id
             };
+            
             IdentityResult result = await _userManager.CreateAsync(newUser, register.Password);
             if (!result.Succeeded) return StatusCode(StatusCodes.Status403Forbidden);
             await _userManager.AddToRoleAsync(newUser, Roles.Admin.ToString());

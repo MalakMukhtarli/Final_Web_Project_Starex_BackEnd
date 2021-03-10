@@ -1,4 +1,5 @@
 ﻿
+using Entity.Entities.Balancess;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,5 +35,7 @@ namespace Starex.ToDoItems
         public string FinCode { get; set; }
         public int BranchId { get; set; }
         public int BalanceId { get; set; }
+        public Balance Balance { get; set; }
+
     }
 }

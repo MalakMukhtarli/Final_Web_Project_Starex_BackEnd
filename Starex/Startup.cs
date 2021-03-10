@@ -73,6 +73,8 @@ namespace Starex
             services.AddScoped<INotficationDal, EFNotficationDal>();
             services.AddScoped<IAddressService, AddressManager>();
             services.AddScoped<IAddressDal, EFAddressDal>();
+            services.AddScoped<IBalanceService, BalanceManager>();
+            services.AddScoped<IBalanceDal, EFBalanceDal>();
             //services.AddScoped<IAppUserService, AppUserManager>();
             //services.AddScoped<IAppUserDal, EFAppUserDal>();
 
