@@ -64,7 +64,7 @@ namespace Starex.Controllers
                 MyBalance = register.Balance.MyBalance
             };
             await _contextBalance.Add(balance);
-            UserNameCode += 20;
+            UserNameCode += 10;
             AppUser newUser = new AppUser
             {
                 Name = register.Name,

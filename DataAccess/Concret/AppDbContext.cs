@@ -33,7 +33,7 @@ namespace DataAccess.Concret
 
         public DbSet<About> Abouts { get; set; }
         public DbSet<News> News { get; set; }
-        public DbSet<NewsDetail> NewsDetail { get; set; }
+        //public DbSet<NewsDetail> NewsDetail { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuestionNavbar> QuestionNavbars { get; set; }
         public DbSet<Intro> Intros { get; set; }

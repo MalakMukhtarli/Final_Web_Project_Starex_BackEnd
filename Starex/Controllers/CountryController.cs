@@ -43,6 +43,7 @@ namespace Starex.Controllers
             _contextAddress = contextAddress;
             _env = env; 
         }
+
         // GET: api/<CountryController>
         [HttpGet]
         public async Task<ActionResult<List<Country>>> Get()
@@ -194,8 +195,6 @@ namespace Starex.Controllers
                         await _contextTariff.Update(tariff);
                     }
                 }
-
-                // SHEKIL SILMEK YAZILACAQ
                 await _context.Update(countryDb);
                 return Ok();
             }
