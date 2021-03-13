@@ -45,6 +45,10 @@ namespace Starex.Controllers
         }
 
         // GET: api/<CountryController>
+        /// <summary>
+        /// where IsDeleted is False, get all Country
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Country>>> Get()
         {
@@ -60,6 +64,11 @@ namespace Starex.Controllers
         }
 
         // GET api/<CountryController>/5
+        /// <summary>
+        /// where IsDeleted is False, Get a Country according to 'Id'
+        /// </summary>
+        /// <param name="id"> whichever item you want, you should write its 'Id' </param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Country>> Get(int id)
         {
@@ -84,6 +93,11 @@ namespace Starex.Controllers
         }
 
         // POST api/<CountryController>
+        /// <summary>
+        /// For create Country and CountryContact
+        /// </summary>
+        /// <param name="country"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Create([FromForm] Country country)
         {
@@ -112,6 +126,12 @@ namespace Starex.Controllers
         }
 
         // PUT api/<CountryController>/5
+        /// <summary>
+        /// For update Country and CountryContact
+        /// </summary>
+        /// <param name="id"> whichever item you want, you should write its 'Id' </param>
+        /// <param name="country"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromForm] Country country)
         {
@@ -148,6 +168,11 @@ namespace Starex.Controllers
         }
 
         // DELETE api/<CountryController>/5
+        /// <summary>
+        /// Delete for Country and relations (CountryContact, Address, Store and Tariff)
+        /// </summary>
+        /// <param name="id"> whichever item you want, you should write its 'Id' </param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

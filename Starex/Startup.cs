@@ -35,8 +35,6 @@ namespace Starex
             services.AddScoped<IAboutService, AboutManager>();
             services.AddScoped<INewsDal, EfNewsDal>();
             services.AddScoped<INewsService, NewsManager>();
-            //services.AddScoped<INewsDetailDal, EFNewsDetailDal>();
-            //services.AddScoped<INewsDetailService, NewsDetailManager>();
             services.AddScoped<IQuestionNavbarDal, EFQuestionNavbarDal>();
             services.AddScoped<IQuestionNavbarService, QuestionNavbarManager>();
             services.AddScoped<IQuestionDal, EFQuestionDal>();

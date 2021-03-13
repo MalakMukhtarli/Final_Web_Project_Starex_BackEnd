@@ -17,24 +17,25 @@ namespace Starex.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _context;
-        //private readonly INewsDetailService _contextDetail;
         private readonly IWebHostEnvironment _env;
 
         public NewsController(INewsService context,
-                              //INewsDetailService contextDetail,
                               IWebHostEnvironment env)
         {
             _context = context;
-            //_contextDetail = contextDetail;
             _env = env;
         }
         // GET: api/<NewsController>
+        /// <summary>
+        /// where IsDeleted is False, get all News
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<News>>> Get()
         {
             try
             {
-                List<News> news = await _context.GetAll();
+                List<News> news = await _context.GetAllOrder();
                 return Ok(news);
             }
             catch (Exception e)
@@ -44,6 +45,11 @@ namespace Starex.Controllers
         }
 
         // GET api/<NewsController>/5
+        /// <summary>
+        /// where IsDeleted is False, Get a News according to 'Id'
+        /// </summary>
+        /// <param name="id">whichever item you want, you should write its 'Id'</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<News>> Get(int id)
         {
@@ -51,14 +57,6 @@ namespace Starex.Controllers
             {
                 News news = await _context.GetWithId(id);
                 if (news == null) return StatusCode(StatusCodes.Status404NotFound);
-                //List<NewsDetail> newsDetails = await _contextDetail.GetAll();
-                //foreach (NewsDetail detail in newsDetails)
-                //{
-                //    if (news.Id == detail.NewsId)
-                //    {
-                //        news.NewsDetail = detail;
-                //    }
-                //}
                 return Ok(news);
             }
             catch (Exception ex)
@@ -68,6 +66,11 @@ namespace Starex.Controllers
         }
 
         // POST api/<NewsController>
+        /// <summary>
+        /// For create News
+        /// </summary>
+        /// <param name="news"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Post([FromForm] News news)
         {
@@ -81,12 +84,6 @@ namespace Starex.Controllers
                 news.Image = await news.Photo.AddImageAsync(_env.WebRootPath, "img");
                 news.ImageBig = await news.PhotoBig.AddImageAsync(_env.WebRootPath, "img");
                 await _context.Add(news);
-                //NewsDetail detail = new NewsDetail
-                //{
-                //    Content=news.NewsDetail.Content,
-                //    ImageBig=news.NewsDetail.ImageBig                    
-                //};
-                //await _contextDetail.Add(detail);
                 return Ok();
             }
             catch (Exception ex)
@@ -96,6 +93,12 @@ namespace Starex.Controllers
         }
 
         // PUT api/<NewsController>/5
+        /// <summary>
+        /// For update News
+        /// </summary>
+        /// <param name="id">whichever item you want, you should write its 'Id'</param>
+        /// <param name="news"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromForm] News news)
         {
@@ -121,16 +124,6 @@ namespace Starex.Controllers
                     if (!news.PhotoBig.PhotoLength(200)) return StatusCode(StatusCodes.Status411LengthRequired);
                     dbNews.ImageBig = await news.PhotoBig.AddImageAsync(_env.WebRootPath, "img");
                 }
-                //List<NewsDetail> allDetail = await _contextDetail.GetAll();
-                //foreach (NewsDetail detail in allDetail)
-                //{
-                //    if (detail.NewsId == dbNews.Id)
-                //    {
-                //        detail.Content = dbNews.NewsDetail.Content;
-                //        detail.ImageBig = dbNews.NewsDetail.ImageBig;
-                //        //await _contextDetail.Update(detail);
-                //    }
-                //}
                 
                 await _context.Update(dbNews);
                 return Ok();
@@ -142,6 +135,11 @@ namespace Starex.Controllers
         }
 
         // DELETE api/<NewsController>/5
+        /// <summary>
+        /// For delete News
+        /// </summary>
+        /// <param name="id">whichever item you want, you should write its 'Id'</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

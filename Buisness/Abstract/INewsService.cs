@@ -9,7 +9,7 @@ namespace Buisness.Abstract
     public interface INewsService
     {
         Task<News> GetWithId(int id);
-        Task<List<News>> GetAll();
+        Task<List<News>> GetAllOrder();
         Task Add(News data);
         Task Update(News data);
         Task Delete(int id);

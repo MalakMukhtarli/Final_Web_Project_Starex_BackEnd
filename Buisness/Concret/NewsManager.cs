@@ -27,9 +27,9 @@ namespace Buisness.Concret
             await _context.Delete(new News { Id = id });
         }
 
-        public async Task<List<News>> GetAll()
+        public async Task<List<News>> GetAllOrder()
         {
-            return await _context.GetAll(n => !n.IsDeleted);
+            return await _context.GetAllOrder(n => !n.IsDeleted);
         }
 
         public async Task<News> GetWithId(int id)

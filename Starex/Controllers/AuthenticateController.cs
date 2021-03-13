@@ -44,6 +44,13 @@ namespace Starex.Controllers
             _roleManager = roleManager;
             Configuration = configuration;
         }
+        [HttpGet]
+        public async Task<IActionResult> Get(string token)
+        {
+            
+            return Ok();
+        }
+
 
         // POST api/<AuthenticateController>/Register
         [HttpPost]
