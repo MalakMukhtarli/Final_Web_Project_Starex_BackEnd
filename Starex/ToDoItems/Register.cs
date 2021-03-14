@@ -14,7 +14,6 @@ namespace Starex.ToDoItems
         public string Name { get; set; }
         [Required]
         public string Surname { get; set; }
-        //public string UserName { get; set; }
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required, DataType(DataType.Password)]

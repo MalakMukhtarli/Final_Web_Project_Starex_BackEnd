@@ -1,0 +1,17 @@
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\DataAccess.deps.json
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\DataAccess.runtimeconfig.json
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\DataAccess.runtimeconfig.dev.json
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\DataAccess.dll
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\DataAccess.pdb
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\Core.dll
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\Entity.dll
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\Core.pdb
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\bin\Release\netcoreapp3.1\Entity.pdb
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.AssemblyInfoInputs.cache
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.AssemblyInfo.cs
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.csproj.CopyComplete
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.dll
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.pdb
+C:\Users\HP\Desktop\Code Academy\Final_Web_Project_Starex_BackEnd\DataAccess\obj\Release\netcoreapp3.1\DataAccess.genruntimeconfig.cache

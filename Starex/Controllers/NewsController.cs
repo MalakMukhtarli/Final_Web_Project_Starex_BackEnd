@@ -1,5 +1,6 @@
 ﻿using Buisness.Abstract;
 using Entity.Entities.Newss;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace Starex.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class NewsController : ControllerBase
     {
         private readonly INewsService _context;

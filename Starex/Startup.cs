@@ -31,6 +31,8 @@ namespace Starex
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            #region AddScoped
             services.AddScoped<IAboutDAL, EFAboutDal>();
             services.AddScoped<IAboutService, AboutManager>();
             services.AddScoped<INewsDal, EfNewsDal>();
@@ -75,6 +77,7 @@ namespace Starex
             services.AddScoped<IBalanceDal, EFBalanceDal>();
             //services.AddScoped<IAppUserService, AppUserManager>();
             //services.AddScoped<IAppUserDal, EFAppUserDal>();
+            #endregion
 
             services.AddDbContext<MyIdentityDbContext>(options =>
             {
